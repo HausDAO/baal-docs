@@ -4,5 +4,6 @@
   "events": "Events",
   "features": "Features",
   "DH-baal-overview": "DAOhaus Baal Overview",
-  "helpers": "Helper Contracts"
+  "helpers": "Helper Contracts",
+  "baal-cli": "Baal CLI"
 }

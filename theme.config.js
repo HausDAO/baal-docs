@@ -6,7 +6,7 @@ export default {
     <>
       <span className="mr-2 font-extrabold hidden md:inline">Baal 👺</span>
       <span className="text-gray-600 font-normal hidden md:inline">
-        Baal 👺 | Moloch v3
+        Moloch v3
       </span>
     </>
   ),
@@ -27,8 +27,8 @@ export default {
       />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:image" content="/baal.gif" />
-      <meta name="twitter:site:domain" content="nextra.vercel.app" />
-      <meta name="twitter:url" content="https://nextra.vercel.app" />
+      <meta name="twitter:site:domain" content="baal-docs.vercel.app" />
+      <meta name="twitter:url" content="https://baal-docs.vercel.app" />
       <meta name="og:title" content="Baal 👺 | Moloch v3" />
       <meta name="og:image" content="/baal.gif" />
       <meta name="apple-mobile-web-app-title" content="Baal 👺" />
