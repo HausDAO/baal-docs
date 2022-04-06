@@ -1,0 +1,210 @@
+# Events Overview
+
+## SetupComplete
+
+```js
+event SetupComplete(
+    bool lootPaused, - default false
+    bool sharesPaused, - default false
+    uint32 gracePeriod, - set period
+    uint32 votingPeriod, - now set period
+    uint256 proposalOffering, - anti-spam
+    uint256 quorumPercent, - quorum?
+    uint256 sponsorThreshold, - for auto-sponsoring
+    uint256 minRetentionPercent, - new dilution bound
+    string name, - for shares / voting token
+    string symbol, - for shares / voting token
+    address[] guildTokens, - ragequitable tokens
+    uint256 totalShares, - ?
+    uint256 totalLoot - ?
+    ** Do we need to add the GnosisSafe vault?
+);
+```
+
+## SubmitProposal
+
+```js
+event SubmitProposal(
+uint256 indexed proposal, - proposal count
+bytes32 indexed proposalDataHash, - action data
+uint256 votingPeriod, - might drop this now
+bytes proposalData, - raw data
+uint256 expiration, - outside time for processing before auto fail
+bool selfSponsor, - true / false depending on whether submitter has enought DAO votes (incl. delegated votes)
+uint256 timestamp, - time submitted
+string details - details
+); /_emits after proposal is submitted_/
+```
+
+## SponsorProposal
+
+```js
+event SponsorProposal(
+address indexed member, - who sponsored
+uint256 indexed proposal, - proposal number / order
+uint256 indexed votingStarts - when voting starts
+); /_emits after member has sponsored proposal_/
+```
+
+## CancelProposal
+
+```js
+event CancelProposal(uint256 indexed proposal);
+```
+
+TODO: add docs -- this is the same as Moloch v2
+This emits when proposal is cancelled.
+
+## SubmitVote
+
+```js
+event SubmitVote(
+address indexed member, - voter
+uint256 balance, - total voting weight including delegated shares \** We probably want to show a voter's specific voting weight for a proposal at the time of voting, since the delegation relies on a snapshot that might not completely match.
+uint256 indexed proposal, - proposal index
+bool indexed approved
+); /*emits after vote is submitted on proposal*/
+```
+
+## ProcessProposal
+
+```js
+event ProcessProposal(
+uint256 indexed proposal, - proposal order
+bool passed, - did proposal get more yes > no
+bool actionFailed - alerts to failure to execute actions
+); /*emits when proposal is processed & executed\*/
+```
+
+## ProcessingFailed
+
+```js
+event ProcessingFailed(uint256 indexed proposal); - duplicate event if processing fails -- don't know if we actually need this.
+/_emits when proposal is processed & executed_/
+```
+
+## Ragequit
+
+```js
+event Ragequit(
+address indexed member, - ragequitter
+address to, - address where RQ tokens are being sent
+uint256 indexed lootToBurn,- burned loot
+uint256 indexed sharesToBurn, - burned shares
+address[] tokens - the tokens that are being burned.
+
+\*\* These tokens default to the GuildToken list, but there's now an advanced ragequit function that allows someone to note which tokens can be burned.
+
+);
+/_emits when users burn Baal `shares` and/or `loot`for given `to` account_/
+```
+
+## Approval
+
+```js
+event Approval(
+address indexed owner, - Baal shareholder
+address indexed spender, - person getting to spend shares
+uint256 amount - amount to be pulled
+); \**Just like ERC20 approval
+/*emits when Baal `shares` are approved for pulls with erc20 accounting\*/
+```
+
+## Transfer
+
+```js
+event Transfer(
+address indexed from, - either from Baal when minting shares for a member or from Member when burning shares
+address indexed to, - either to 0x when burning shares or to another member when minting
+uint256 amount - amount being minted or burned
+);
+** If it's from member to member that's a transfer
+**I think this works as an event for us, but we could consider separate events for minting and burning to make things a little clearer.
+/_emits when Baal `shares` are minted, burned or transferred with erc20 accounting_/
+```
+
+## TransferLoot
+
+```js
+event TransferLoot(
+address indexed from,
+address indexed to,
+uint256 amount
+);
+** Same deal as above when it comes to watching the to / from in terms of understanding whether loot is being minted or burned.
+** Probably place to do cleanup, since this might be duplicative with Loot having it's own events.
+/_emits when Baal `loot` is minted, burned or transferred_/
+```
+
+## DelegateChanged
+
+```js
+event DelegateChanged(
+address indexed delegator, -- person delegating
+address indexed fromDelegate, -- old delegate (could be delegator)
+address indexed toDelegate -- new delegate
+); \**Just emits when there's a change in WHO is the delegate
+/*emits when an account changes its voting delegate\*/
+```
+
+## DelegateVotesChanged
+
+```js
+event DelegateVotesChanged(
+address indexed delegate,
+uint256 previousBalance,
+uint256 newBalance
+);
+\*\*Updates the balance of the delegate's voting weight at the snapshot time of the function being called. Means that they won't be able to use voting power on proposals in the works, but on future proposals.
+
+/_emits when a delegate account's voting balance changes_/
+```
+
+## ShamanSet
+
+```js
+event ShamanSet(address indexed shaman, uint256 permission); /_emits when a shaman permission changes_/
+```
+
+Permissions:
+
+- Admin - just transferrability
+- Manager - Mint / burn
+- Governor - God mode to change gov config
+
+## GuildTokenSet
+
+```js
+event GuildTokenSet(address indexed token, bool enabled); /_emits when a guild token changes_/
+```
+
+## GovernanceConfigSet
+
+```js
+event GovernanceConfigSet(
+uint32 voting,- new voting period
+uint32 grace, - new grace period
+uint256 newOffering, - new offering
+uint256 quorum, - new quorum
+uint256 sponsor, - new self-sponsor threshold
+uint256 minRetention - new dilution bound
+); /_emits when gov config changes_/
+```
+
+## SharesPaused
+
+```js
+event SharesPaused(bool paused); \**When paused shares are non-transferrable
+/*emits when shares are paused or unpaused\*/
+```
+
+## Lootpaused
+
+```js
+event LootPaused(bool paused); \**When paused loot is non-transferrable
+/*emits when loot is paused or unpaused\*/
+```
+
+```
+
+```

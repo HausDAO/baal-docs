@@ -1,95 +1,45 @@
 # Get Started
 
-## Quick Start with Vercel
+Much of this section is from the Moloch [Mystics GitHub Baal Repository](https://github.com/Moloch-Mystics/Baal)
 
-You can start by creating your own Nextra site and deploying to Vercel by clicking the link:
+## Setup
 
-[![](https://vercel.com/button)](https://vercel.com/new/clone?demo-description=Markdown%20powered%20docs%20site.%20Built%20with%20Next.js.&demo-image=https%3A%2F%2Fnextra.vercel.app%2Fdemo.png&demo-title=Documentation%20Starter%20Kit&demo-url=https%3A%2F%2Fnextra.vercel.app%2F&project-name=nextjs-docs&repository-name=nextjs-docs&s=https%3A%2F%2Fgithub.com%2Fshuding%2Fnextra&from=templates)
+If you are going to just use this project feel free to clone it. If you would like to submit any pull requests please create an issue or work on a current issue and fork the repo. The two main groups that are contributing to this project are [DAOhaus](https://discord.com/channels/709210493549674598) and [MetaCartel](https://discord.com/channels/702325961433284609).
 
-Vercel will create the Nextra repository and deploy the site for you with just a few clicks.  
-Once done, every change in the repository will be deployed automatically.
+### Setup Environment:
 
-## Create Manually
+`npm install` - to install all of the components for the project
 
-Nextra works like a Next.js plugin, and it accepts a theme config (layout) to render the page. To start:
+### Building:
 
-1. Install Next.js, Nextra and React: `yarn add next nextra react react-dom`
+This project uses the [hardhat](https://hardhat.org/) ethereum tools for solidity compiling and running a virtual ethereum environment for testing.
 
-2. Install the docs theme (you can use any theme you like): `yarn add nextra-theme-docs`
+`npx hardhat compile` - will compile the solidity code and generate your contract artifacts (in the /artifacts directory)
 
-3. Create the following Next.js config:
+### Testing:
 
-```jsx
-// next.config.js
-const withNextra = require('nextra')({
-  theme: 'nextra-theme-docs',
-  themeConfig: './theme.config.js',
-  // optional: add `unstable_staticImage: true` to enable Nextra's auto image import
-})
-module.exports = withNextra()
-```
+If you are looking to work on unit tests for this project be sure to read the README file in the test directory.
 
-4. Create a `theme.config.js` file for the docs theme:
+`npx hardhat test` - run the unit tests
 
-```jsx
-// theme.config.js
-export default {
-  projectLink: 'https://github.com/shuding/nextra', // GitHub link in the navbar
-  docsRepositoryBase: 'https://github.com/shuding/nextra/blob/master', // base URL for the docs repository
-  titleSuffix: ' – Nextra',
-  nextLinks: true,
-  prevLinks: true,
-  search: true,
-  customSearch: null, // customizable, you can use algolia for example
-  darkMode: true,
-  footer: true,
-  footerText: `MIT ${new Date().getFullYear()} © Shu Ding.`,
-  footerEditLink: `Edit this page on GitHub`,
-  logo: (
-    <>
-      <svg>...</svg>
-      <span>Next.js Static Site Generator</span>
-    </>
-  ),
-  head: (
-    <>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta name="description" content="Nextra: the next docs builder" />
-      <meta name="og:title" content="Nextra: the next docs builder" />
-    </>
-  ),
-}
-```
+## Interfaces Supported
 
-import Callout from 'nextra-theme-docs/callout'
+[ERC-20](https://eips.ethereum.org/EIPS/eip-20)
 
-<Callout>
-  More configuration options for the docs theme can be found
-  [here](/themes/docs/configuration).
-</Callout>
+> Baal shares are pausable, fungible tokens. Non-conformant tokens can also be handled by Baal by implementing `safeTransfer/From()`.
 
-5. Create `pages/_app.js` and include the theme stylesheet:
+[EIP-2612](https://eips.ethereum.org/EIPS/eip-2612)
 
-```jsx
-import 'nextra-theme-docs/style.css'
+> Baal shares support EIP-712-style approvals by implementing `permit()`, allowing pulls in a single transaction and 'gas' to be paid in tokens (including Baal shares), abstracting the need to hold ETH.
 
-export default function Nextra({ Component, pageProps }) {
-  return <Component {...pageProps} />
-}
-```
+[ERC-721](https://eips.ethereum.org/EIPS/eip-721)
 
-6. You are good to go! Run `yarn next` to start.
+> Baal is a 'safe' receiver of NFTs by implementing `onERC721Received()`.
 
----
+[ERC-1155](https://eips.ethereum.org/EIPS/eip-1155)
 
-<span id="sidebar-and-anchor-links" />
-<Callout>
-  Any `.md` or `.mdx` file will turn into a doc page and be displayed in
-  sidebar. You can also create a `meta.json` file to customize the page order
-  and title. <br /> Check the source code: https://github.com/shuding/nextra for
-  more information.
-</Callout>
+> Baal is a 'safe' receiver of tokens issued under 'multi-token' contracts by implementing `onERC1155Received()` and `onERC1155BatchReceived()`.
 
-<Callout>
-You can also use [`<style jsx>`](https://nextjs.org/docs/basic-features/built-in-css-support#css-in-js) to style elements inside `theme.config.js`.
-</Callout>
+[ERC-3156](https://eips.ethereum.org/EIPS/eip-3156)
+
+> Tokens held in Baal can be flash lent for an amendable fee by implementing `flashLoan()`. This feature can be turned on and off.
