@@ -1,9 +1,10 @@
 {
   "index": "Introduction",
+  "features": "Features",
   "get-started": "Get Started",
+  "contracts": "Contracts",
+  "tools": "Tools",
   "functions": "Functions",
   "events": "Events",
-  "features": "Features",
-  "tools": "Tools",
   "baal-cli": "Baal CLI"
 }
