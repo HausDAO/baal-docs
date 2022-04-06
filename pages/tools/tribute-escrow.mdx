@@ -1,0 +1,50 @@
+# Tribute Escrow
+
+**TributeEscrow** is a helper contract for making tribute proposals
+
+- Provides contract to approve _ERC-20_ transfers
+- Provides simple function/interface to make single proposal type
+
+## Details
+
+There is a `TributeEscrow` contract deployed to each supported network.
+
+### Rinkeby
+
+- **[TributeEscrow](https://rinkeby.etherscan.io/address/0x34f1F0585A4a8ca62e9573940f77aD25FbdED860)**: `0x34f1F0585A4a8ca62e9573940f77aD25FbdED860`
+
+### Kovan
+
+- **[TributeEscrow](https://kovan.etherscan.io/address/0xcC3fE4c9F976167db373DEe88EB9b0E1Dc834c6B)**: `0xcC3fE4c9F976167db373DEe88EB9b0E1Dc834c6B`
+
+## Create Tribute Proposal
+
+1. Make a `submitTributeProposal` function call to the TributeEscrow contract
+
+```js
+function submitTributeProposal(
+    Baal baal,
+    address token,
+    uint256 amount,
+    uint256 shares,
+    uint256 loot,
+    uint32 expiration,
+    string memory details
+)
+```
+
+- `msg.sender` is member tributing/requesting shares/loot
+- `baal` is the DAO we are tributing too
+- `token` - ERC-20 `tokenAddress`
+- `amount` of tribute, `shares`, `loot` in Wei
+- `expiration` is epoch time, same as in baal `submitProposal`
+- `details` - proposal details schema we use
+
+2. `TributeEscrow` contract encodes ERC-20 token transfers and makes the proposal against the baal contract
+3. Subgraph catches the normal `submitProposal` event to create proposal entity
+4. TributeEscrow emits additional event that we catch and add the following fields to the proposal entity:
+   - `tributeOffered`
+   - `tributeToken`
+   - `tributeTokenSymbol`
+   - `tributeTokenDecimals`
+   - `tributeEscrowRecipient`
