@@ -1,6 +1,5 @@
 # Tribute Escrow
 
-Note: You can also reference this page on the [DAOhaus v3 Wiki](https://github.com/HausDAO/daohaus-monorepo/wiki/TributeEscrow)
 **TributeEscrow** is a helper contract for making tribute proposals
 
 - Provides contract to approve _ERC-20_ transfers
@@ -8,9 +7,15 @@ Note: You can also reference this page on the [DAOhaus v3 Wiki](https://github.c
 
 ## Details
 
-There is one `TributeEscrow` contract deployed to each supported network.
+There is a `TributeEscrow` contract deployed to each supported network.
 
-- [Contract Addresses](https://github.com/HausDAO/daohaus-monorepo/wiki/Contracts)
+### Rinkeby
+
+- **[TributeEscrow](https://rinkeby.etherscan.io/address/0x34f1F0585A4a8ca62e9573940f77aD25FbdED860)**: `0x34f1F0585A4a8ca62e9573940f77aD25FbdED860`
+
+### Kovan
+
+- **[TributeEscrow](https://kovan.etherscan.io/address/0xcC3fE4c9F976167db373DEe88EB9b0E1Dc834c6B)**: `0xcC3fE4c9F976167db373DEe88EB9b0E1Dc834c6B`
 
 ## Create Tribute Proposal
 
@@ -43,14 +48,3 @@ function submitTributeProposal(
    - `tributeTokenSymbol`
    - `tributeTokenDecimals`
    - `tributeEscrowRecipient`
-
-## Takeaways
-
-- Nice to have these trusted proposal type contracts. We can be 100% sure of what this proposal is doing.
-- Our UI needs to enforce that the account making the tribute needs to approve `TributeEscrow` to spend the ERC-20.
-- If the account making the tribute were to transfer the tokens out before the proposal is processed, the proposal will fail on execution.
-
-## Resources
-
-- [Contract](https://github.com/HausDAO/Baal/blob/feat/baalZodiac/contracts/tools/TributeEscrow.sol)
-- [Subgraph mapping](https://github.com/HausDAO/daohaus-v3-subgraph-sandbox/blob/master/src/tribute-escrow-mapping.ts)
