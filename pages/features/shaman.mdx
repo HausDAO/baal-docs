@@ -1,0 +1,46 @@
+import Callout from 'nextra-theme-docs/callout'
+
+# Shaman
+
+**Shaman** are one of the core features of Baal that were introduced in _Moloch v2.5_. A **Shaman** is a separate contract that the DAO approves. Shaman are _very powerful_ as they can make critical changes to the DAO outside of the proposal process. This introduces a high degree of flexibility, but should be approached with intentionality and caution.
+
+The Shaman emerged as a direct result of the design goal to provide flexibility to DAOs to change the underlying membership structure without needing to resummon. Shaman have their own set of functions and permissions.
+
+## Shaman Functions
+
+## Shaman Permissions
+
+In order to be able to makes changes to loot and shares, Shaman need the persmission to do so. Everything settable by Shaman can be set by DAO via proposals. Shaman permissions are set by composing the values from a registry:
+
+```markdown
+0 = no permission
+1 = admin only
+2 = manager only
+4 = governance only
+3 = admin + manager
+5 = admin + governance
+6 = manager + governance
+7 = admin + manager + governance
+```
+
+Using the above registry values, if a Shaman has a permission value of `0` then there are no permissions set. If a Shaman has a permission value of `7`, then they have _combined permissions_ of Admin, Manager, and Governance. The `7` is a sum of all of the combined permissions, ie. `7` is a combintion of `1 (admin only)`, `2 (manager only)`, and `4 (governance only)`.
+
+<Callout emoji="👺">
+  Setting these permissions should be done intentionally and with care, since
+  this can provide a Shaman with a lot of power.
+</Callout>
+
+```js
+    bool public adminLock; /* once set to true, no new admin roles can be assigned to shaman */
+    bool public managerLock; /* once set to true, no new manager roles can be assigned to shaman */
+    bool public governorLock; /* once set to true, no new governor roles can be assigned to shaman */
+    mapping(address => uint256) public shamans; /*maps shaman addresses to their permission level*/
+```
+
+## Projects Using Shamans
+
+Since Shamans were introduced in _Moloch v2.5_ there are a few projects that have integrated this functionality.
+
+### Yeeter v2
+
+### DAOgroni
