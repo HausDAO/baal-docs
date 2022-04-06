@@ -30,17 +30,28 @@ Using the above registry values, if a Shaman has a permission value of `0` then 
   this can provide a Shaman with a lot of power.
 </Callout>
 
+There are `boolean` values that can be set for Shaman that relate to permissions:
+
 ```js
     bool public adminLock; /* once set to true, no new admin roles can be assigned to shaman */
     bool public managerLock; /* once set to true, no new manager roles can be assigned to shaman */
     bool public governorLock; /* once set to true, no new governor roles can be assigned to shaman */
-    mapping(address => uint256) public shamans; /*maps shaman addresses to their permission level*/
 ```
 
-## Projects Using Shamans
+There is a `mapping` that maps each Shaman addresss to the set permission levels:
+
+```js
+mapping(address => uint256) public shamans; /*maps shaman addresses to their permission level*/
+```
+
+## Projects Using Shaman
 
 Since Shamans were introduced in _Moloch v2.5_ there are a few projects that have integrated this functionality.
 
 ### Yeeter v2
 
+[Yeeter](https://yeet.daohaus.club/)
+
 ### DAOgroni
+
+TODO: DAOgroni Shaman overview
