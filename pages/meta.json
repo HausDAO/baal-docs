@@ -4,7 +4,7 @@
   "get-started": "Get Started",
   "contracts": "Contracts",
   "tools": "Tools",
-  "functions/index": "Functions",
+  "functions": "Functions",
   "events": "Events",
   "baal-cli": "Baal CLI"
 }
