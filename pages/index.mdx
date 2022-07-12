@@ -14,3 +14,103 @@ This is the most recent collaborative repository for Moloch V3, codename Baal. (
 Baal is a minimal yet composable DAO template continuing work from the Moloch, Minion and Compound frameworks to make it easier for people to combine and command crypto assets with intuitive membership games.
 
 <Image src="/baal.gif" alt="Baal Animation" width={500} height={500} />
+
+## Introduction
+Baal is a governance layer that sits on top of a multisig treasury layer. It uses the Gnosis Zodiac to interface with the treasury.
+
+By abstracting governance into its own layer Baal allow a more nounced 'Moloch style' control over consensus.
+
+### Governance Units
+Just like in the Moloch V2 contracts there are 2 main governance units
+ - shares
+ - loot
+ - 
+These are both represented now by erc20s which can have minting, burning and transferability controlled by the main DAO contract.
+
+Unlike Moloch V2, transferability of these tokens can be controlled by the DAO. For example, a DAO may start soul bound (like v2) but then decide at some future time to turn on tradaility for shares and/or loot.
+
+#### Shares
+Just like Moloch V2 shares have direct execution, voting and exit rights around actions taken by the main dao contract. Shareholders are the collective DAO admins.
+
+#### Loot
+Also similar to Moloch V2, loot has only exit rights against the DAO treasury, so loot does not have the ability to admin the DAO config. But because it has exit rights it is still a powerful unit and also because it is an erc20 can be used in the many composible ways a token can be used.
+
+### DAO configuration and guild management
+There are many configuration options that can be updated in the contract through standard governance and proposal flow. For example:
+
+- mint/burn/pause shares/loot
+- set governance or admin config
+- Enable/Disable Shamans
+
+### Whats a Shaman?
+Besides standard governance by share holding members there is a new idea of a Shaman. Shamans are specific addresses that have more granular control outside the standard governance proposal flow. These addresses should always be contracts that have been explicitly given these rights through the standard proposal flow.
+
+> Shamans are addresses that can be granted roles that allow them to control some aspects of the DAO configuration without proposal.
+
+### Roles and Shamans
+
+The DAO is always a super admin over it's own config. Meaning the DAO can vote to make changes to its own configuration at any time.
+
+Along with this, through roles, a more granular control can be given to Shamans.
+
+- Governor - Cancel a proposal, set Governance Config (change the length of proposals, if there is a required quorum)
+- Manager - mint/burn shares/loot
+- Admin - set Admin Config. pause shares/loot
+
+### Initial setup
+Initial setup of the dao can happen in 2 ways. See the baal Summoner factory for details. 
+
+- Standard summon - deploy and setup all contracts and treasuries
+- Bring your own treasury - summon contracts but use an already deployed treasury (multisig Safe)
+
+In standard summoning, the summoner will provide a DAO name and token symbol along with a list of actions to be executed on setup. These initial actions may be setting governance/admin config, minting shares/loot to other initial members and/or adding any initial Shamans.
+
+If you are bringing your own Safe - Setup will occur through a signed transaction in the multisig. This will do the same actions in the standard summon but will also enable the Baal module on the Safe.
+
+### Proposal flow
+The proposal flow is similar to a Moloch V2 but there are a few differences. Basically proposals are made to the dao to execute some code (could be minting shares, transferring funds, changing config, or any mix of things... every proposal is a multicall). It includeds a time boxed window for voting, followed by one for a grace period. The basic flow is mapped out here:
+
+- A proposal is submitted by anyone
+- Any member, as long as they have enough shares to meet the ‘sponsor threshold’ can sponsor a proposal. It may even auto sponsor if submitted by a member with enough shares. 
+- The proposal will go into a voting period where shareholding members can vote yes or no
+- The proposal then goes into a grace period, this is where minority members or the dao can take further action (ragequit or cancel)
+- The proposal goes into a ready state, this is where actions included in the proposal can be executed.
+- After execution or if the proposal was terminated for some other reason then the proposal will be in one of these states
+    - Canceled - either canceled through failed execution or through a manager shaman
+    - Processed - executed successfully
+    - defeated - did not pass and will not execute
+
+Proposals must be processed in the order they are voted on.
+        
+> Notes on Canceling a proposal
+> Cancellable if proposal is in voting, sender is sponsor, governor, or if sponsor has fallen below threshold
+> A Governor Shaman can cancel a proposal, it can be cancelled anytime while in voting period.
+
+Member actions
+- vote - a member uses its shares to vote yes or no on a proposal.
+- vote with signature - vote though eip 712 (allows votes to be collected through a gasless signature and submitted later)
+- ragequit - burn some amount of shares/loot to a proportional amount of funds in the treasury
+- delegate - add or remove your shares voting power to another address, this address can be another member or any address.
+
+> Note on optimistic voting
+> A proposal passes with more yes votes than no votes. Depending on governance settings there may also be a required quorum of total votes for a proposal to pass.
+
+### Governance Config, settings that can be modified by the DAO or by a Governor Shaman
+- voting - minimum voting period length of a proposal
+- grace -  minimum voting period length of a proposal
+- newOffering - the amount a native token that must be used when making a proposal, this is transfered to the dao and is non refundable.
+- quorum - minimum % of shares that must vote yes for it to pass
+- sponsorThreshold - minimum number of shares to sponsor a proposal (not %)
+- minRetention - auto-fails a proposal if more than (1- minRetentionPercent) * total shares exit before processing
+        
+### Admin Config
+Admin config is to control the transferability of shares and loot.
+
+### Note on other other baal only actions
+
+- execute as baal - a proposal can be executed from the baal contract directly (this mainly is used to setup or rescue funds that where sent directly to the baal contract)
+- admin locks - the DAO can permenetily lock special rights that could be given to shamans (for example, permanently disable Governor/Admin/Manager Shamans) 
+
+
+
+
