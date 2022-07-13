@@ -1,6 +1,6 @@
 export default {
-  github: 'https://github.com/jonathanprozzi/baal-docs',
-  docsRepositoryBase: 'https://github.com/jonathanprozzi/baal-docs/blob/main',
+  github: 'https://github.com/hausdao/baal-docs',
+  docsRepositoryBase: 'https://github.com/hausdao/baal-docs/blob/main',
   titleSuffix: ' - Baal',
   logo: (
     <>
