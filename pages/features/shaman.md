@@ -2,6 +2,8 @@ import Callout from 'nextra-theme-docs/callout'
 
 # Shaman
 
+*It’s not magic when you’re wielding the power of complex smart contracts. In the war for coordination, Shamans are tools in service to intentional communities.  Use responsibly.*
+
 **Shaman** are one of the core features of Baal that were introduced in _Moloch v2.5_. A **Shaman** is a separate contract that the DAO approves. Shaman are _very powerful_ as they can make critical changes to the DAO outside of the proposal process. This introduces a high degree of flexibility, but should be approached with intentionality and caution.
 
 The Shaman emerged as a direct result of the design goal to provide flexibility to DAOs to change the underlying membership structure without needing to resummon. Shaman have their own set of functions and permissions.
@@ -54,4 +56,4 @@ Since Shamans were introduced in _Moloch v2.5_ there are a few projects that hav
 
 ### DAOgroni
 
-TODO: DAOgroni Shaman overview
+The DAOgroni NFT contract is a shaman. When someone mints a cocktail NFT and then they drink it, the shaman changes the number of shares that person has inside the MolochDAO, instantaneously, because it avoids the proposal process.  First you buy the NFT and xDAI gets forwarded to DAO treasury, then you drink it, which gives you DAO shares. This is all done with a shaman.
