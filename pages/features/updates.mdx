@@ -1,0 +1,45 @@
+# Updates
+
+## Shares and Loot
+
+- Both shares (economic and voting rights) and loot (economic rights only) are now ERC-20 tokens
+- This creates full composability and compatibility with ERC20-based apps and protocols (E.g. token-gating, etc.)
+- The DAO can toggle on or off transferability for shares and loot independently (off = permissioned DAO a la Moloch V2)
+- Full support for vote delegation a la Compound Governor
+- Full support for vote with signature a la Compound Governor
+
+## Shamans and Extensibility
+
+- Shamans are external contracts that the DAO can approve for special permissions
+- Manager shamans can mint/burn shares and loot without a DAO proposal -- this enables a brand new design space for DAO formation and governance (trustless flash DAOs, share staking, and much more)
+- Governor shamans can adjust governance parameters with out a DAO proposal (see below)
+- Admin Shamans can toggle share/loot transferability without a DAO proposal
+
+## Governance Parameters
+
+- All governance parameters are now adjustable by the DAO (via proposal)
+- Also adjustable by a governor shaman, if established by the DAO
+
+## Flexible Proposals
+
+- Moloch v3 proposals have arbitrary execution, which means they can interact with any smart contract
+- This means that DAOs no longer have to move funds into a Minion (breaking ragequit) in order to take, say, DeFi actions
+- Proposals are multi-send compatible, which means multiple actions can be stacked together into a single proposal
+
+## Gnosis Safe
+
+- Using the Zodiac pattern, a Moloch v3 DAO can use a Gnosis Safe as its treasury
+- Supports all on-chain assets, including ERC-20, ERC-721, ERC-1155, veTokens, native coins, etc.
+- Enables compatibility with all of the Safe-based apps and tools
+- Facilitates easy "upgrade" from a multisig to a DAO
+- Migrate to another DAO framework without moving funds
+
+## Advanced Ragequit
+
+- Share- and loot-holders can now choose which tokens they want to receive when ragequitting
+- Removes the need for the DAO to approve (née "whitelist") tokens before receiving/spending them
+
+## Additional Features
+
+- Add an option for a proposal sponsor to vote yes along with their sponsorship
+- DAO can use an external contract as its ragequittable treasury
