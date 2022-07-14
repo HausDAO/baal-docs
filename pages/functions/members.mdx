@@ -1,12 +1,12 @@
 # Members
 
-## Ragequit
+## ragequit
 
 ```solidity
-event Ragequit(address indexed member, address to, uint256 indexed lootToBurn, uint256 indexed sharesToBurn, address[] tokens)
+function ragequit(address to, uint256 sharesToBurn, uint256 lootToBurn, address[] tokens) external nonpayable
 ```
 
-
+Process member burn of `shares` and/or `loot` to claim &#39;fair share&#39; of specified `tokens`
 
 
 
@@ -14,19 +14,20 @@ event Ragequit(address indexed member, address to, uint256 indexed lootToBurn, u
 
 | Name | Type | Description |
 |---|---|---|
-| member `indexed` | address | undefined |
-| to  | address | undefined |
-| lootToBurn `indexed` | uint256 | undefined |
-| sharesToBurn `indexed` | uint256 | undefined |
-| tokens  | address[] | undefined |
+| to | address | Account that receives &#39;fair share&#39;. |
+| sharesToBurn | uint256 | Baal voting weight to burn. |
+| lootToBurn | uint256 | Baal pure economic weight to burn. |
+| tokens | address[] | Array of tokens to include in rage quit calculation |
 
-## SubmitVote
+
+
+## submitVote
 
 ```solidity
-event SubmitVote(address indexed member, uint256 balance, uint256 indexed proposal, bool indexed approved)
+function submitVote(uint32 id, bool approved) external nonpayable
 ```
 
-
+Submit vote - proposal must exist &amp; voting period must not have ended.
 
 
 
@@ -34,10 +35,9 @@ event SubmitVote(address indexed member, uint256 balance, uint256 indexed propos
 
 | Name | Type | Description |
 |---|---|---|
-| member `indexed` | address | undefined |
-| balance  | uint256 | undefined |
-| proposal `indexed` | uint256 | undefined |
-| approved `indexed` | bool | undefined |
+| id | uint32 | Number of proposal in `proposals` mapping to cast vote on. |
+| approved | bool | If &#39;true&#39;, member will cast `yesVotes` onto proposal - if &#39;false&#39;, `noVotes` will be counted. |
+
 
 
 ## submitVoteWithSig

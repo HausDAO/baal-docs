@@ -1,12 +1,12 @@
 # Proposals
 
-## SubmitProposal
+## submitProposal
 
 ```solidity
-event SubmitProposal(uint256 indexed proposal, bytes32 indexed proposalDataHash, uint256 votingPeriod, bytes proposalData, uint256 expiration, uint256 baalGas, bool selfSponsor, uint256 timestamp, string details)
+function submitProposal(bytes proposalData, uint32 expiration, uint256 baalGas, string details) external payable returns (uint256)
 ```
 
-
+Submit proposal to Baal `members` for approval within given voting period.
 
 
 
@@ -14,15 +14,16 @@ event SubmitProposal(uint256 indexed proposal, bytes32 indexed proposalDataHash,
 
 | Name | Type | Description |
 |---|---|---|
-| proposal `indexed` | uint256 | undefined |
-| proposalDataHash `indexed` | bytes32 | undefined |
-| votingPeriod  | uint256 | undefined |
-| proposalData  | bytes | undefined |
-| expiration  | uint256 | undefined |
-| baalGas  | uint256 | undefined |
-| selfSponsor  | bool | undefined |
-| timestamp  | uint256 | undefined |
-| details  | string | undefined |
+| proposalData | bytes | Multisend encoded transactions or proposal data |
+| expiration | uint32 | undefined |
+| baalGas | uint256 | undefined |
+| details | string | Context for proposal. |
+
+#### Returns
+
+| Name | Type | Description |
+|---|---|---|
+| _0 | uint256 | proposal Count for submitted proposal. |
 
 
 
@@ -44,23 +45,22 @@ Sponsor proposal to Baal `members` for approval within voting period.
 
 
 
-## ProcessProposal
+## processProposal
 
 ```solidity
-event ProcessProposal(uint256 indexed proposal, bool passed, bool actionFailed)
+function processProposal(uint32 id, bytes proposalData) external nonpayable
 ```
 
+Process `proposal` &amp; execute internal functions.
 
-
-
+*Proposal must have succeeded, not been processed, not expired, retention threshold must be met*
 
 #### Parameters
 
 | Name | Type | Description |
 |---|---|---|
-| proposal `indexed` | uint256 | undefined |
-| passed  | bool | undefined |
-| actionFailed  | bool | undefined |
+| id | uint32 | Number of proposal in `proposals` mapping to process for execution. |
+| proposalData | bytes | Packed multisend data to execute via Gnosis multisend library |
 
 
 
