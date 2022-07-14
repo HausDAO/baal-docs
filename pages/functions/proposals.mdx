@@ -1,0 +1,100 @@
+# Proposals
+
+## SubmitProposal
+
+```solidity
+event SubmitProposal(uint256 indexed proposal, bytes32 indexed proposalDataHash, uint256 votingPeriod, bytes proposalData, uint256 expiration, uint256 baalGas, bool selfSponsor, uint256 timestamp, string details)
+```
+
+
+
+
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| proposal `indexed` | uint256 | undefined |
+| proposalDataHash `indexed` | bytes32 | undefined |
+| votingPeriod  | uint256 | undefined |
+| proposalData  | bytes | undefined |
+| expiration  | uint256 | undefined |
+| baalGas  | uint256 | undefined |
+| selfSponsor  | bool | undefined |
+| timestamp  | uint256 | undefined |
+| details  | string | undefined |
+
+
+
+## sponsorProposal
+
+```solidity
+function sponsorProposal(uint32 id) external nonpayable
+```
+
+Sponsor proposal to Baal `members` for approval within voting period.
+
+
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| id | uint32 | Number of proposal in `proposals` mapping to sponsor. |
+
+
+
+## ProcessProposal
+
+```solidity
+event ProcessProposal(uint256 indexed proposal, bool passed, bool actionFailed)
+```
+
+
+
+
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| proposal `indexed` | uint256 | undefined |
+| passed  | bool | undefined |
+| actionFailed  | bool | undefined |
+
+
+
+## cancelProposal
+
+```solidity
+function cancelProposal(uint32 id) external nonpayable
+```
+
+Cancel proposal prior to execution
+
+*Cancellable if proposal is during voting, sender is sponsor, governor, or if sponsor has fallen below threshold*
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| id | uint32 | Number of proposal in `proposals` mapping to process for execution. |
+
+
+## executeAsBaal
+
+```solidity
+function executeAsBaal(address _to, uint256 _value, bytes _data) external nonpayable
+```
+
+Can only be called by the avatar which means this can only be called if passed by another     proposal or by a delegated signer on the Safe
+
+*Function to Execute arbitrary code as baal - useful if funds are accidentally sent here*
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| _to | address | address to call |
+| _value | uint256 | value to include in wei |
+| _data | bytes | arbitrary transaction data |
