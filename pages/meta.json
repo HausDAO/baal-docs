@@ -1,8 +1,9 @@
 {
   "index": "Introduction",
-  "features": "Features",
   "get-started": "Get Started",
-  "contracts": "Contracts",
+  "features": "Features",
+  "interfaces": "Interfaces",
+  "configuration": "Configuration",
   "tools": "Tools",
   "functions": "Functions",
   "events": "Events",
