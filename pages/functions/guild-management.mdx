@@ -1,4 +1,6 @@
-### setShamans
+# Guild Management
+
+## setShamans
 
 ```solidity
 function setShamans(address[] _shamans, uint256[] _permissions) external nonpayable
@@ -15,7 +17,7 @@ Baal-only function to set shaman status.
 | _shamans | address[] | Addresses of shaman contracts |
 | _permissions | uint256[] | Permission level of each shaman in _shamans |
 
-### lockAdmin
+## lockAdmin
 
 ```solidity
 function lockAdmin() external nonpayable
@@ -23,8 +25,6 @@ function lockAdmin() external nonpayable
 
 Lock admin so setShamans cannot be called with admin changes
 
-
-# Guild Management
 
 ## lockGovernor
 
