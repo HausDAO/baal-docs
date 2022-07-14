@@ -1,0 +1,60 @@
+# Members
+
+## Ragequit
+
+```solidity
+event Ragequit(address indexed member, address to, uint256 indexed lootToBurn, uint256 indexed sharesToBurn, address[] tokens)
+```
+
+
+
+
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| member `indexed` | address | undefined |
+| to  | address | undefined |
+| lootToBurn `indexed` | uint256 | undefined |
+| sharesToBurn `indexed` | uint256 | undefined |
+| tokens  | address[] | undefined |
+
+## SubmitVote
+
+```solidity
+event SubmitVote(address indexed member, uint256 balance, uint256 indexed proposal, bool indexed approved)
+```
+
+
+
+
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| member `indexed` | address | undefined |
+| balance  | uint256 | undefined |
+| proposal `indexed` | uint256 | undefined |
+| approved `indexed` | bool | undefined |
+
+
+## submitVoteWithSig
+
+```solidity
+function submitVoteWithSig(uint32 id, bool approved, bytes signature) external nonpayable
+```
+
+Submit vote with EIP-712 signature - proposal must exist &amp; voting period must not have ended.
+
+
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| id | uint32 | Number of proposal in `proposals` mapping to cast vote on. |
+| approved | bool | If &#39;true&#39;, member will cast `yesVotes` onto proposal - if &#39;false&#39;, `noVotes` will be counted. |
+| signature | bytes | Concatenated signature |
+

@@ -1,0 +1,104 @@
+# Shaman Functions
+
+## setAdminConfig
+
+```solidity
+function setAdminConfig(bool pauseShares, bool pauseLoot) external nonpayable
+```
+
+Baal-or-admin-only function to set admin config (pause/unpause shares/loot)
+
+
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| pauseShares | bool | Turn share transfers on or off |
+| pauseLoot | bool | Turn loot transfers on or off |
+
+## setGovernanceConfig
+
+```solidity
+function setGovernanceConfig(bytes _governanceConfig) external nonpayable
+```
+
+Baal-or-governance-only function to change periods.
+
+
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| _governanceConfig | bytes | Encoded configuration parameters voting, grace period, tribute, quorum, sponsor threshold, retention bound |
+
+
+
+## mintShares
+
+```solidity
+function mintShares(address[] to, uint256[] amount) external nonpayable
+```
+
+Baal-or-manager-only function to mint shares.
+
+
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| to | address[] | Array of addresses to receive shares |
+| amount | uint256[] | Array of amounts to mint |
+
+## mintLoot
+
+```solidity
+function mintLoot(address[] to, uint256[] amount) external nonpayable
+```
+
+Baal-or-manager-only function to mint loot.
+
+
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| to | address[] | Array of addresses to mint loot |
+| amount | uint256[] | Array of amounts to mint |
+
+## burnLoot
+
+```solidity
+function burnLoot(address[] from, uint256[] amount) external nonpayable
+```
+
+Baal-or-manager-only function to burn loot.
+
+
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| from | address[] | Array of addresses to lose loot |
+| amount | uint256[] | Array of amounts to burn |
+
+## burnShares
+
+```solidity
+function burnShares(address[] from, uint256[] amount) external nonpayable
+```
+
+Baal-or-manager-only function to burn shares.
+
+
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| from | address[] | Array of addresses to lose shares |
+| amount | uint256[] | Array of amounts to burn |

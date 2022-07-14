@@ -1,3 +1,11 @@
 {
-  "index": "Functions"
+  "index": "Functions",
+  "setup": "Setup",
+  "proposals": "Proposal Functions",
+  "members": "Member Functions",
+  "guild-management": "Guild Managment Functions",
+  "shaman": "Shaman Functions",
+  "getters": "Getter Functions",
+  "helpers": "Helper Functions",
+  "docgen": "Full Generated Docs"
 }
