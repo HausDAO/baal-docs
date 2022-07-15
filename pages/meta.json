@@ -2,10 +2,8 @@
   "index": "Introduction",
   "get-started": "Get Started",
   "features": "Features",
-  "interfaces": "Interfaces",
-  "configuration": "Configuration",
-  "tools": "Tools",
   "functions": "Functions",
   "events": "Events",
+  "tools": "Tools",
   "baal-cli": "Baal CLI"
 }

@@ -1,17 +1,595 @@
-# Baal
+# Baal Function Overview
+
+---
+
+# Setup
+
+## setUp
+
+```solidity
+function setUp(bytes _initializationParams) external nonpayable
+```
+
+Summon Baal with voting configuration &amp; initial array of `members` accounts with `shares` &amp; `loot` weights.
 
 
 
-> Baal &#39;;_;&#39;.
+#### Parameters
 
-Flexible guild contract inspired by Moloch DAO framework.
+| Name | Type | Description |
+|---|---|---|
+| _initializationParams | bytes | Encoded setup information. |
 
 
-  - Setup
-  - Proposal Functions
-  - Member Functions
-  - Guild Managment Functions
-  - Shaman Functions
-  - Getter Functions
-  - Helper Functions
-  - Full Generated Docs
+
+---
+
+# Proposals
+
+## submitProposal
+
+```solidity
+function submitProposal(bytes proposalData, uint32 expiration, uint256 baalGas, string details) external payable returns (uint256)
+```
+
+Submit proposal to Baal `members` for approval within given voting period.
+
+
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| proposalData | bytes | Multisend encoded transactions or proposal data |
+| expiration | uint32 | undefined |
+| baalGas | uint256 | undefined |
+| details | string | Context for proposal. |
+
+#### Returns
+
+| Name | Type | Description |
+|---|---|---|
+| _0 | uint256 | proposal Count for submitted proposal. |
+
+
+
+## sponsorProposal
+
+```solidity
+function sponsorProposal(uint32 id) external nonpayable
+```
+
+Sponsor proposal to Baal `members` for approval within voting period.
+
+
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| id | uint32 | Number of proposal in `proposals` mapping to sponsor. |
+
+
+
+## processProposal
+
+```solidity
+function processProposal(uint32 id, bytes proposalData) external nonpayable
+```
+
+Process `proposal` &amp; execute internal functions.
+
+*Proposal must have succeeded, not been processed, not expired, retention threshold must be met*
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| id | uint32 | Number of proposal in `proposals` mapping to process for execution. |
+| proposalData | bytes | Packed multisend data to execute via Gnosis multisend library |
+
+
+
+## cancelProposal
+
+```solidity
+function cancelProposal(uint32 id) external nonpayable
+```
+
+Cancel proposal prior to execution
+
+*Cancellable if proposal is during voting, sender is sponsor, governor, or if sponsor has fallen below threshold*
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| id | uint32 | Number of proposal in `proposals` mapping to process for execution. |
+
+
+## executeAsBaal
+
+```solidity
+function executeAsBaal(address _to, uint256 _value, bytes _data) external nonpayable
+```
+
+Can only be called by the avatar which means this can only be called if passed by another     proposal or by a delegated signer on the Safe
+
+*Function to Execute arbitrary code as baal - useful if funds are accidentally sent here*
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| _to | address | address to call |
+| _value | uint256 | value to include in wei |
+| _data | bytes | arbitrary transaction data |
+
+
+
+---
+
+# Members
+
+## ragequit
+
+```solidity
+function ragequit(address to, uint256 sharesToBurn, uint256 lootToBurn, address[] tokens) external nonpayable
+```
+
+Process member burn of `shares` and/or `loot` to claim &#39;fair share&#39; of specified `tokens`
+
+
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| to | address | Account that receives &#39;fair share&#39;. |
+| sharesToBurn | uint256 | Baal voting weight to burn. |
+| lootToBurn | uint256 | Baal pure economic weight to burn. |
+| tokens | address[] | Array of tokens to include in rage quit calculation |
+
+
+
+## submitVote
+
+```solidity
+function submitVote(uint32 id, bool approved) external nonpayable
+```
+
+Submit vote - proposal must exist &amp; voting period must not have ended.
+
+
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| id | uint32 | Number of proposal in `proposals` mapping to cast vote on. |
+| approved | bool | If &#39;true&#39;, member will cast `yesVotes` onto proposal - if &#39;false&#39;, `noVotes` will be counted. |
+
+
+
+## submitVoteWithSig
+
+```solidity
+function submitVoteWithSig(uint32 id, bool approved, bytes signature) external nonpayable
+```
+
+Submit vote with EIP-712 signature - proposal must exist &amp; voting period must not have ended.
+
+
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| id | uint32 | Number of proposal in `proposals` mapping to cast vote on. |
+| approved | bool | If &#39;true&#39;, member will cast `yesVotes` onto proposal - if &#39;false&#39;, `noVotes` will be counted. |
+| signature | bytes | Concatenated signature |
+
+
+
+---
+
+# Guild Management
+
+## setShamans
+
+```solidity
+function setShamans(address[] _shamans, uint256[] _permissions) external nonpayable
+```
+
+Baal-only function to set shaman status.
+
+
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| _shamans | address[] | Addresses of shaman contracts |
+| _permissions | uint256[] | Permission level of each shaman in _shamans |
+
+## lockAdmin
+
+```solidity
+function lockAdmin() external nonpayable
+```
+
+Lock admin so setShamans cannot be called with admin changes
+
+
+## lockGovernor
+
+```solidity
+function lockGovernor() external nonpayable
+```
+
+Lock governor so setShamans cannot be called with governor changes
+
+
+
+
+## lockManager
+
+```solidity
+function lockManager() external nonpayable
+```
+
+Lock manager so setShamans cannot be called with manager changes
+
+
+
+---
+
+# Shaman Functions
+
+## setAdminConfig
+
+```solidity
+function setAdminConfig(bool pauseShares, bool pauseLoot) external nonpayable
+```
+
+Baal-or-admin-only function to set admin config (pause/unpause shares/loot)
+
+
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| pauseShares | bool | Turn share transfers on or off |
+| pauseLoot | bool | Turn loot transfers on or off |
+
+## setGovernanceConfig
+
+```solidity
+function setGovernanceConfig(bytes _governanceConfig) external nonpayable
+```
+
+Baal-or-governance-only function to change periods.
+
+
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| _governanceConfig | bytes | Encoded configuration parameters voting, grace period, tribute, quorum, sponsor threshold, retention bound |
+
+
+
+## mintShares
+
+```solidity
+function mintShares(address[] to, uint256[] amount) external nonpayable
+```
+
+Baal-or-manager-only function to mint shares.
+
+
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| to | address[] | Array of addresses to receive shares |
+| amount | uint256[] | Array of amounts to mint |
+
+## mintLoot
+
+```solidity
+function mintLoot(address[] to, uint256[] amount) external nonpayable
+```
+
+Baal-or-manager-only function to mint loot.
+
+
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| to | address[] | Array of addresses to mint loot |
+| amount | uint256[] | Array of amounts to mint |
+
+## burnLoot
+
+```solidity
+function burnLoot(address[] from, uint256[] amount) external nonpayable
+```
+
+Baal-or-manager-only function to burn loot.
+
+
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| from | address[] | Array of addresses to lose loot |
+| amount | uint256[] | Array of amounts to burn |
+
+## burnShares
+
+```solidity
+function burnShares(address[] from, uint256[] amount) external nonpayable
+```
+
+Baal-or-manager-only function to burn shares.
+
+
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| from | address[] | Array of addresses to lose shares |
+| amount | uint256[] | Array of amounts to burn |
+
+
+---
+
+# Getters
+
+## state
+
+```solidity
+function state(uint32 id) external view returns (enum Baal.ProposalState)
+```
+
+State helper to determine proposal state
+
+
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| id | uint32 | Number of proposal in proposals |
+
+#### Returns
+
+| Name | Type | Description |
+|---|---|---|
+| _0 | enum Baal.ProposalState | Unborn -&gt; Submitted -&gt; Voting -&gt; Grace -&gt; Ready -&gt; Processed         \-&gt; Cancelled  \-&gt; Defeated |
+
+
+## getProposalStatus
+
+```solidity
+function getProposalStatus(uint32 id) external view returns (bool[4])
+```
+
+Helper to get recorded proposal flags
+
+
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| id | uint32 | Number of proposal in proposals |
+
+#### Returns
+
+| Name | Type | Description |
+|---|---|---|
+| _0 | bool[4] | [cancelled, processed, passed, actionFailed] |
+
+
+## getCurrentVotes
+
+```solidity
+function getCurrentVotes(address account) external view returns (uint256 votes)
+```
+
+Returns the current delegated `vote` balance for `account`.
+
+
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| account | address | The user to check delegated `votes` for. |
+
+#### Returns
+
+| Name | Type | Description |
+|---|---|---|
+| votes | uint256 | Current `votes` delegated to `account`. |
+
+
+## getPriorVotes
+
+```solidity
+function getPriorVotes(address account, uint256 timeStamp) external view returns (uint256 votes)
+```
+
+Returns the prior number of `votes` for `account` as of `timeStamp`.
+
+
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| account | address | The user to check `votes` for. |
+| timeStamp | uint256 | The unix time to check `votes` for. |
+
+#### Returns
+
+| Name | Type | Description |
+|---|---|---|
+| votes | uint256 | Prior `votes` delegated to `account`. |
+
+## isAdmin
+
+```solidity
+function isAdmin(address shaman) external view returns (bool)
+```
+
+Helper to check if shaman permission contains admin capabilities
+
+
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| shaman | address | Address attempting to execute admin permissioned functions |
+
+#### Returns
+
+| Name | Type | Description |
+|---|---|---|
+| _0 | bool | undefined |
+
+## isGovernor
+
+```solidity
+function isGovernor(address shaman) external view returns (bool)
+```
+
+Helper to check if shaman permission contains governor capabilities
+
+
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| shaman | address | Address attempting to execute governor permissioned functions |
+
+#### Returns
+
+| Name | Type | Description |
+|---|---|---|
+| _0 | bool | undefined |
+
+## isManager
+
+```solidity
+function isManager(address shaman) external view returns (bool)
+```
+
+Helper to check if shaman permission contains manager capabilities
+
+
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| shaman | address | Address attempting to execute manager permissioned functions |
+
+#### Returns
+
+| Name | Type | Description |
+|---|---|---|
+| _0 | bool | undefined |
+
+
+
+totalLoot
+
+```solidity
+function totalLoot() external view returns (uint256)
+```
+
+Helper to check total supply of child loot contract
+
+
+
+
+#### Returns
+
+| Name | Type | Description |
+|---|---|---|
+| _0 | uint256 | undefined |
+
+## totalShares
+
+```solidity
+function totalShares() external view returns (uint256)
+```
+
+Helper to check total supply of child shares contract
+
+
+
+
+#### Returns
+
+| Name | Type | Description |
+|---|---|---|
+| _0 | uint256 | undefined |
+
+## totalSupply
+
+```solidity
+function totalSupply() external view returns (uint256)
+```
+
+Helper to check total supply of loot and shares
+
+
+
+
+#### Returns
+
+| Name | Type | Description |
+|---|---|---|
+| _0 | uint256 | undefined |
+
+
+
+
+---
+
+# Helpers
+
+## hashOperation
+
+```solidity
+function hashOperation(bytes _transactions) external pure returns (bytes32 hash)
+```
+
+Returns the keccak256 hash of calldata
+
+
+
+#### Parameters
+
+| Name | Type | Description |
+|---|---|---|
+| _transactions | bytes | undefined |
+
+#### Returns
+
+| Name | Type | Description |
+|---|---|---|
+| hash | bytes32 | undefined |
