@@ -1,8 +1,6 @@
 {
   "shaman": "Shaman",
   "minions": "Minions",
-  "poster": "Poster",
-  "rage-quit-bank": "RageQuitBank",
-  "shaman-minter": "ShamanMinter",
-  "tribute-escrow": "TributeEscrow"
+  "tribute-minion": "Tribute Minion",
+  "onboarder-shaman": "Onboarder Shaman"
 }
