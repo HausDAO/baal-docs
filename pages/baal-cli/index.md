@@ -29,7 +29,9 @@ Usage:
 
 OPTIONS:
 ```
+
   --dao Dao address 
+
   --id  Proposal ID 
 ```
 
@@ -42,6 +44,7 @@ Usage:
 
 OPTIONS:
 ```
+
   --dao Dao address 
 ```
 
@@ -55,11 +58,17 @@ Usage:
 
 OPTIONS:
 ```
+
   --applicant   applicant address 
+
   --dao         Dao address 
+
   --expiration  seconds after grace that proposal expires, 0 for none 
+
   --loot        number loot 
+
   --meta        updated meta data 
+
   --shares      number shares 
 ```
 
@@ -72,8 +81,11 @@ Usage:
 
 OPTIONS:
 ```
+
   --dao         Dao address 
+
   --data        the data, need to get this from the submit events 
+
   --id          Proposal ID 
 ```
 
@@ -86,10 +98,15 @@ Usage:
 
 OPTIONS:
 ```
+
   --dao         Dao address 
+
   --loot        number of loot 
+
   --shares      number of shares 
+
   --to          RQ to 
+
   --tokens      the token addresses (array) (escape quotes) (no spaces) ex [\"0x123...\"] 
 ```
 
@@ -102,7 +119,9 @@ Usage:
 
 OPTIONS:
 ```
+
   --dao Dao address 
+
   --id  Proposal ID 
 ```
 
@@ -115,7 +134,9 @@ Usage:
 
 OPTIONS:
 ```
+
   --dao Dao address 
+
   --id  Proposal ID 
 ```
 
@@ -128,14 +149,23 @@ Usage:
 
 OPTIONS:
 ```
+
   --factory             Dao factory address 
+
   --loot                numnber of initial loot for summoners (string array, escape quotes) 
+
   --lootpaused          is loot transferable 
+
   --meta                updated meta data 
+
   --name                share token symbol 
+
   --shaman              any initial shamans 
+
   --shares              numnber of initial shares for summoners (string array, escape quotes) 
+
   --sharespaused        are shares transferable 
+
   --summoners           the summoner addresses (array) (escape quotes) (no spaces) ex [\"0x123...\"] 
 ```
 
@@ -147,12 +177,20 @@ Usage:
 ```hardhat [GLOBAL OPTIONS] tributeprop --amount <STRING> --dao <STRING> --expiration <STRING> --loot <STRING> --minion <STRING> --shares <STRING> --token <STRING>```
 
 OPTIONS:
-```  --amount      Tribute token amount 
+```
+
+  --amount      Tribute token amount 
+
   --dao         Dao address 
+
   --expiration  Tribute expiration date. 0 for none 
+
   --loot        Tribute loot requested 
+
   --minion      Tribute Minion address 
+
   --shares      Tribute shares requested 
+
   --token       Tribute token address 
 ```
 
@@ -165,8 +203,11 @@ Usage:
 
 OPTIONS:
 ```
+
   --approve     true is yes and false is no 
+
   --dao         Dao address 
+
   --id          Proposal ID 
 ```
 
