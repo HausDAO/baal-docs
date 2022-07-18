@@ -19,32 +19,33 @@ function setAdminConfig(bool pauseShares, bool pauseLoot)
 ```
 
 ### Manager Shaman
-```
+```js
 function mintShares(address[] calldata to, uint256[] calldata amount)
   external
   baalOrManagerOnly
 ```
 
-```
+```js
 function burnShares(address[] calldata from, uint256[] calldata amount)
   external
   baalOrManagerOnly
 ```
 
-```
+```js
 function mintLoot(address[] calldata to, uint256[] calldata amount)
   external
   baalOrManagerOnly
 ```
 
-```
+```js
 function burnLoot(address[] calldata from, uint256[] calldata amount)
   external
   baalOrManagerOnly
 ```
 
 ### Governor Shaman
-```
+
+```js
 function setGovernanceConfig(bytes memory _governanceConfig)
   external
   baalOrGovernorOnly
@@ -69,7 +70,7 @@ bytes packed params
 
 In order to be able to makes changes to loot and shares, Shaman need the persmission to do so. Everything settable by Shaman can be set by DAO via proposals. Shaman permissions are set by composing the values from a registry:
 
-```markdown
+```
 0 = no permission
 1 = admin only
 2 = manager only
