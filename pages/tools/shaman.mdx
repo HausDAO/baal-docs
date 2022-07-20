@@ -19,6 +19,7 @@ function setAdminConfig(bool pauseShares, bool pauseLoot)
 ```
 
 ### Manager Shaman
+
 ```js
 function mintShares(address[] calldata to, uint256[] calldata amount)
   external
@@ -52,6 +53,7 @@ function setGovernanceConfig(bytes memory _governanceConfig)
 ```
 
 bytes packed params
+
 ```
         (
             uint32 voting,
@@ -105,10 +107,10 @@ mapping(address => uint256) public shamans; /*maps shaman addresses to their per
 ## Projects Using Shaman
 
 ### Onborder Manager Shaman
+
 Easy onboard a new bember into a Loot position in the DAO through sending the chains native token or erc20.
 
-https://github.com/HausDAO/Baal/blob/feat/onboarder/contracts/tools/OnboarderShaman.sol
-
+[Onboarder Shaman Contract](https://github.com/HausDAO/Baal/blob/feat/onboarder/contracts/tools/OnboarderShaman.sol)
 
 Since Shamans were introduced in _Moloch v2.5_ there are a few projects that have integrated this functionality.
 
