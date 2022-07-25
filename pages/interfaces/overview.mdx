@@ -9,3 +9,56 @@
 [EIP-2612](https://eips.ethereum.org/EIPS/eip-2612)
 
 > Baal shares support EIP-712-style approvals by implementing `permit()`, allowing pulls in a single transaction and 'gas' to be paid in tokens (including Baal shares), abstracting the need to hold ETH.
+
+[eip-1167](https://eips.ethereum.org/EIPS/eip-1167)
+
+> Minimal Proxy Contract
+
+## SharesToken.sol
+
+- ERC20 openzeppelin/contracts/token/ERC20/ERC20.sol
+- minimal clone proxy eip-1167
+- Ownable by baal
+- Initializable openzeppelin/contracts/proxy/utils/Initializable.sol - for setup by baal
+- delegation management similar to comp
+- before transfer override: Allows transfers if msg.sender is Baal which enables minting and burning, move delegates and self delegate
+
+
+External delegation functions
+```
+function delegate(address delegatee) external
+function delegateBySig(
+        address delegatee,
+        uint256 nonce,
+        uint256 deadline,
+        bytes calldata signature
+    ) external 
+
+```
+
+Events
+```
+event DelegateVotesChanged(
+    address indexed delegate, 
+    uint previousBalance, 
+    uint newBalance
+);
+event DelegateChanged(
+    address indexed delegator, 
+    address indexed fromDelegate, 
+    address indexed toDelegate
+);
+event Transfer(
+    address indexed from, 
+    address indexed to, 
+    uint256 amount
+);
+```
+
+## LootToken.sol
+
+- ERC20 openzeppelin/contracts/token/ERC20/ERC20.sol
+- Ownable by baal
+- minimal clone proxy eip-1167
+- Initializable openzeppelin/contracts/proxy/utils/Initializable.sol - for setup by baal
+- before transfer override: Allows transfers if msg.sender is Baal which enables minting and burning
