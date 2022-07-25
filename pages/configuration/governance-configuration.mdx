@@ -5,4 +5,40 @@
 - newOffering - the amount a native token that must be used when making a proposal, this is transfered to the dao and is non refundable.
 - quorum - minimum % of shares that must vote yes for it to pass
 - sponsorThreshold - minimum number of shares to sponsor a proposal (not %)
-- minRetention - auto-fails a proposal if more than (1- minRetentionPercent) \* total shares exit before processing
+- minRetention - auto-fails a proposal if more than (1- minRetentionPercent) \* total shares and loot exit before processing
+
+
+```
+/// @notice Baal-or-governance-only function to change periods.
+    /// @param _governanceConfig Encoded configuration parameters voting, grace period, tribute, quorum, sponsor threshold, retention bound
+    function setGovernanceConfig(bytes memory _governanceConfig)
+        external
+        baalOrGovernorOnly
+    {
+        (
+            uint32 voting,
+            uint32 grace,
+            uint256 newOffering,
+            uint256 quorum,
+            uint256 sponsor,
+            uint256 minRetention
+        ) = abi.decode(
+                _governanceConfig,
+                (uint32, uint32, uint256, uint256, uint256, uint256)
+            );
+        if (voting != 0) votingPeriod = voting; /*if positive, reset min. voting periods to first `value`*/
+        if (grace != 0) gracePeriod = grace; /*if positive, reset grace period to second `value`*/
+        proposalOffering = newOffering; /*set new proposal offering amount */
+        quorumPercent = quorum;
+        sponsorThreshold = sponsor;
+        minRetentionPercent = minRetention;
+        emit GovernanceConfigSet(
+            voting,
+            grace,
+            newOffering,
+            quorum,
+            sponsor,
+            minRetention
+        );
+    }
+    ```

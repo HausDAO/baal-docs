@@ -1,4 +1,5 @@
 {
   "admin-configuration": "Admin",
-  "governance-configuration": "Governance"
+  "governance-configuration": "Governance",
+  "admin-locks": "Admin Locks"
 }
