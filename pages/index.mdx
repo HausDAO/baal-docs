@@ -17,7 +17,7 @@ Initial Development and much of this section is from the Moloch [Mystics GitHub 
 
 Current active development is happening in a fork on [DAOhaus Github](https://github.com/HausDAO/Baal)
 
-This is the most recent collaborative repository for Moloch V3, codename Baal. (July 15, 2022). This message will change when the repository is depricated.
+This is the most recent collaborative repository for Moloch V3, codename Baal. (July 15, 2022). This message will change when the repository is deprecated.
 
 Baal is a minimal yet composable DAO template continuing work from the Moloch, Minion and Compound frameworks to make it easier for people to combine and command crypto assets with intuitive membership games.
 
@@ -35,7 +35,7 @@ Just like in the [Moloch V2 contracts](https://github.com/MolochVentures/moloch)
  
 These are both represented now by erc20s which can have minting, burning and transferability controlled by the main DAO contract.
 
-Unlike Moloch V2, transferability of these tokens can be controlled by the DAO. For example, a DAO may start soul bound (like v2) but then decide at some future time to turn on tradaility for shares and/or loot.
+Unlike Moloch V2, transferability of these tokens can be controlled by the DAO. For example, a DAO may start soul bound (like v2) but then decide at some future time to turn on tradability for shares and/or loot.
 
 #### Shares
 Just like Moloch V2 shares have direct execution, voting and exit rights around actions taken by the main dao contract. Shareholders are the collective DAO admins.
@@ -51,7 +51,7 @@ There are many configuration options that can be updated in the contract through
 - Enable/Disable Shamans
 
 ### Whats a Shaman?
-Besides standard governance by share holding members there is a new idea of a Shaman. Shamans are specific addresses that have more granular control outside the standard governance proposal flow. These addresses should always be contracts that have been explicitly given these rights through the standard proposal flow or durring initial DAO setup.
+Besides standard governance by share holding members there is a new idea of a Shaman. Shamans are specific addresses that have more granular control outside the standard governance proposal flow. These addresses should always be contracts that have been explicitly given these rights through the standard proposal flow or during initial DAO setup.
 
 > Shamans are addresses that can be granted roles that allow them to control some aspects of the DAO configuration without proposal.
 
@@ -76,10 +76,10 @@ In standard summoning, the summoner will provide a DAO name and token symbol alo
 If you are bringing your own Safe - Setup will occur through a signed transaction in the multisig. This will do the same actions in the standard summon but will also enable the Baal module on the Safe.
 
 ### Proposal flow
-The proposal flow is similar to a Moloch V2 but there are a few differences. Basically proposals are made to the dao to execute some code (could be minting shares, transferring funds, changing config, or any mix of things... every proposal is a multicall). It includeds a time boxed window for voting, followed by one for a grace period. The basic flow is mapped out here:
+The proposal flow is similar to a Moloch V2 but there are a few differences. Basically proposals are made to the dao to execute some code (could be minting shares, transferring funds, changing config, or any mix of things... every proposal is a multicall). It includes a time boxed window for voting, followed by one for a grace period. The basic flow is mapped out here:
 
 - Submit - A proposal is submitted by anyone
-    - A offering may be required by the DAO on proposal submission. This is mainly to prevent spam and is espcially relevant on side chains. THis setting is configurable by the DAO. 
+    - An offering may be required by the DAO on proposal submission. This is mainly to prevent spam and is especially relevant on side chains. THis setting is configurable by the DAO. 
 - Sponsor - Any member, as long as they have enough shares to meet the ‘sponsor threshold’ can sponsor a proposal. It may even auto sponsor if submitted by a member with enough shares. 
 - Voting - The proposal will go into a voting period where shareholding members can vote yes or no
 - Grace - The proposal then goes into a grace period, this is where minority members or the dao can take further action (ragequit or cancel)
@@ -93,7 +93,7 @@ Proposals must be processed in the order they are voted on.
         
 > Notes on Canceling a proposal
 > Cancellable if proposal is in voting, sender is sponsor, governor, or if sponsor has fallen below threshold
-> A Governor Shaman can cancel a proposal, it can be cancelled anytime while in voting period.
+> A Governor Shaman can cancel a proposal, it can be canceled anytime while in voting period.
 
 Member actions
 - Vote - a member uses its shares to vote yes or no on a proposal.
@@ -107,7 +107,7 @@ Member actions
 ### Governance Config, settings that can be modified by the DAO or by a Governor Shaman
 - voting - minimum voting period length of a proposal
 - grace -  minimum voting period length of a proposal
-- newOffering - the amount a native token that must be used when making a proposal, this is transfered to the dao and is non refundable.
+- newOffering - the amount a native token that must be used when making a proposal, this is transferred to the dao and is non refundable.
 - quorum - minimum % of shares that must vote yes for it to pass
 - sponsorThreshold - minimum number of shares to sponsor a proposal (not %)
 - minRetention - auto-fails a proposal if more than (1- minRetentionPercent) * total shares exit before processing
@@ -117,10 +117,10 @@ Admin config is to control the transferability of shares and loot.
 
 ### Note on other other baal only actions
 
-You may see that "Guild Kick" (Changing shares to loot, a major tenent of Moloch v2) is not present in Baal, this is because it can be created theough a baal only proposal (multi call that is voted on by the DAO). Also besides Guild kick you can also do the inverse as a "Promotion" (loot to shares).
+You may see that "Guild Kick" (Changing shares to loot, a major tenent of Moloch v2) is not present in Baal, this is because it can be created through a baal only proposal (multi call that is voted on by the DAO). Also besides Guild kick you can also do the inverse as a "Promotion" (loot to shares).
 
 - execute as baal - A proposal can be executed from the baal contract directly (this mainly is used to for DAO configuration and member management, In can also be used to rescue funds that where sent directly to the baal contract)
-- admin locks - The DAO can permenetily lock special rights that could be given to Shamans (for example, permanently disable Governor/Admin/Manager Shamans) 
+- admin locks - The DAO can permanently lock special rights that could be given to Shamans (for example, permanently disable Governor/Admin/Manager Shamans) 
 
 
 
