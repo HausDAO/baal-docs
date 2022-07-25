@@ -2,19 +2,13 @@
 
 Admin configuration is to control the transferability of shares and loot.
 
-```
-    // ****************
-    // SHAMAN FUNCTIONS
-    // ****************
-    /// @notice Baal-or-admin-only function to set admin config (pause/unpause shares/loot)
-    /// @param pauseShares Turn share transfers on or off
-    /// @param pauseLoot Turn loot transfers on or off
+```js
     function setAdminConfig(bool pauseShares, bool pauseLoot)
         external
         baalOrAdminOnly
     {
-        sharesPaused = pauseShares; /*set pause `shares`*/
-        lootPaused = pauseLoot; /*set pause `loot`*/
+        sharesPaused = pauseShares; 
+        lootPaused = pauseLoot; 
         emit SharesPaused(pauseShares);
         emit LootPaused(pauseLoot);
     }

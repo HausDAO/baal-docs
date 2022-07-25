@@ -8,9 +8,7 @@
 - minRetention - auto-fails a proposal if more than (1- minRetentionPercent) \* total shares and loot exit before processing
 
 
-```
-/// @notice Baal-or-governance-only function to change periods.
-    /// @param _governanceConfig Encoded configuration parameters voting, grace period, tribute, quorum, sponsor threshold, retention bound
+```js
     function setGovernanceConfig(bytes memory _governanceConfig)
         external
         baalOrGovernorOnly
@@ -41,4 +39,4 @@
             minRetention
         );
     }
-    ```
+```
