@@ -54,7 +54,8 @@ function setGovernanceConfig(bytes memory _governanceConfig)
 
 bytes packed params
 
-```
+```js
+
         (
             uint32 voting,
             uint32 grace,
@@ -72,15 +73,16 @@ bytes packed params
 
 In order to be able to makes changes to loot and shares, Shaman need the persmission to do so. Everything settable by Shaman can be set by DAO via proposals. Shaman permissions are set by composing the values from a registry:
 
-```
-0 = no permission
-1 = admin only
-2 = manager only
-4 = governance only
-3 = admin + manager
-5 = admin + governance
-6 = manager + governance
-7 = admin + manager + governance
+```md
+  
+  0 = no permission
+  1 = admin only
+  2 = manager only
+  4 = governance only
+  3 = admin + manager
+  5 = admin + governance
+  6 = manager + governance
+  7 = admin + manager + governance
 ```
 
 Using the above registry values, if a Shaman has a permission value of `0` then there are no permissions set. If a Shaman has a permission value of `7`, then they have _combined permissions_ of Admin, Manager, and Governance. The `7` is a sum of all of the combined permissions, ie. `7` is a combintion of `1 (admin only)`, `2 (manager only)`, and `4 (governance only)`.
