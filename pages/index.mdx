@@ -1,11 +1,14 @@
 import Bleed from 'nextra-theme-docs/bleed'
 import Image from 'next/image'
+import Callout from 'nextra-theme-docs/callout'
 
 # Baal 👺
 
 ## Meet Baal
 
-_Baal sets the season, and gives forth His voice from the clouds._
+<Callout emoji="👺">
+  Baal sets the season, and gives forth His voice from the clouds._
+</Callout>
 
 *There was a time when humanity mistakenly assumed that we were at battle against each other. Then, the original Moloch DAO contract made us aware that the enemy is Moloch, the demon god of coordination failure.* 
 
@@ -35,7 +38,12 @@ Just like in the [Moloch V2 contracts](https://github.com/MolochVentures/moloch)
  
 These are both represented now by erc20s which can have minting, burning and transferability controlled by the main DAO contract.
 
-Unlike Moloch V2, transferability of these tokens can be controlled by the DAO. For example, a DAO may start soul bound (like v2) but then decide at some future time to turn on tradability for shares and/or loot.
+Unlike Moloch V2, transferability of these tokens can be controlled by the DAO. 
+
+<Callout emoji="👺">
+  SoulBound DAO   
+  A DAO may start soul bound (like v2) but then decide at some future time to turn on tradability for shares and/or loot.
+</Callout>
 
 #### Shares
 Just like Moloch V2 shares have direct execution, voting and exit rights around actions taken by the main dao contract. Shareholders are the collective DAO admins.
@@ -53,7 +61,9 @@ There are many configuration options that can be updated in the contract through
 ### Whats a Shaman?
 Besides standard governance by share holding members there is a new idea of a Shaman. Shamans are specific addresses that have more granular control outside the standard governance proposal flow. These addresses should always be contracts that have been explicitly given these rights through the standard proposal flow or during initial DAO setup.
 
-> Shamans are addresses that can be granted roles that allow them to control some aspects of the DAO configuration without proposal.
+<Callout emoji="👺">
+  Shamans are addresses that can be granted roles that allow them to control some aspects of the DAO configuration without proposal.
+</Callout>
 
 ### Roles and Shamans
 
@@ -90,10 +100,12 @@ The proposal flow is similar to a Moloch V2 but there are a few differences. Bas
     - Defeated - did not pass and will not execute
 
 Proposals must be processed in the order they are voted on.
-        
-> Notes on Canceling a proposal
-> Cancellable if proposal is in voting, sender is sponsor, governor, or if sponsor has fallen below threshold
-> A Governor Shaman can cancel a proposal, it can be canceled anytime while in voting period.
+
+<Callout emoji="👺">
+  Canceling a proposal  
+  Cancellable if proposal is in voting, sender is sponsor, governor, or if sponsor has fallen below threshold   
+  A Governor Shaman can cancel a proposal, it can be canceled anytime while in voting period.
+</Callout>
 
 Member actions
 - Vote - a member uses its shares to vote yes or no on a proposal.
@@ -101,8 +113,10 @@ Member actions
 - Ragequit - burn some amount of shares/loot to a proportional amount of funds in the treasury
 - Delegate - add or remove your shares voting power to another address, this address can be another member or any address.
 
-> Note on optimistic voting
-> A proposal passes with more yes votes than no votes. Depending on governance settings there may also be a required quorum of total votes for a proposal to pass.
+<Callout emoji="👺">
+  Optimistic voting     
+  A proposal passes with more yes votes than no votes. Depending on governance settings there may also be a required quorum of total votes for a proposal to pass.
+</Callout>
 
 ### Governance Config, settings that can be modified by the DAO or by a Governor Shaman
 - voting - minimum voting period length of a proposal
