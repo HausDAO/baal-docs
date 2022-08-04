@@ -1,3 +1,5 @@
+import Callout from 'nextra-theme-docs/callout'
+
 # Governance Configuration
 
 - voting - minimum voting period length of a proposal
@@ -40,3 +42,29 @@
         );
     }
 ```
+
+<Callout emoji="👺">
+  Voting and Grace Periods.  
+  As a Dao matures the length of theses periods can change. Early DAOs may want faster periods to get stuff done. 
+  DAOs with Larger tresuries may want longer locking periods.
+</Callout>
+
+<Callout emoji="👺">
+  New Offerings.
+  Recently we have seen the rise of spam proposals, Especially on side chains where gas is very cheap. 
+  A small offering can be used to deter the spammers.
+</Callout>
+
+<Callout emoji="👺">
+  Quorum and Sponsor Threshholds.
+  Having transferable and tradable shares opens a whole slew of issues. 
+  These configurations can help combat those. Quorum does not allow early execution though,
+  voting and grace periods are still enforced.
+</Callout>
+
+<Callout emoji="👺">
+  Minimum Retention
+  If a mass ragequit of shares and loot happens durring a proposal it will fail.
+  This should be set to a relativly high % and shares/loot should 
+  have good distrobution to avoid potential griefing
+</Callout>
