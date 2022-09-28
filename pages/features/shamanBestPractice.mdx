@@ -1,0 +1,26 @@
+import Callout from 'nextra-theme-docs/callout'
+
+# Shaman Best Practice
+
+## Shaman Accounts
+
+A Shaman is a separate contract that the DAO approves to make critical 
+changes to the DAO outside of the proposal process. 
+Any address (External owned accounts or contracts) can be approved by the DAO to have
+Shaman permissions.
+
+Currently there is no real reason besides testing to use an EOA. 
+
+DAOs should be specifically careful when summoning with 
+Shamans or voting in a new Shaman address that it is a verified and trusted contract.
+
+All members should be aware of the active Shamans and what their purpose is.
+
+For example: If an EOA is a Shaman with manager permissions they basically 
+own the dao because they could unilaterally mint as many shares as they want.
+
+## Upgradability of Shamans
+
+Because shamans are outside contracts they may use an upgrade pattern. 
+The ownership (the account that can upgrade) of these contracts is especially important. 
+If the Shaman has an owner that is not the DAO it could be upgraded to add malicious logic without the DAOs consent.
