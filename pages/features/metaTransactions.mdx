@@ -1,0 +1,19 @@
+import Callout from 'nextra-theme-docs/callout'
+
+# Meta Transactions
+
+Meta transactions can allow a trusted party to pay for users gas. 
+This can lower the barrier to entry and allow more seamless integrations with other apps.
+
+THe DAO, through proposal, can update the trusted forwarder. 
+If the trusted forwarder is the zero address 
+it will work like normal without meta transactions enabled.
+
+## Best Practice
+
+A malicious trusted forwarder could be used to spoof the account of any DAO member.
+Because of this special care should be used when enabling this feature. 
+A bad trusted forwarder or a modifiable one could.
+
+Special note:
+the trusted forwarder can be updated through DAO proposal or a governor Shaman. 
