@@ -6,6 +6,5 @@
   "migrations": "Migrations",
   "erc20TokenContracts": "ERC20 Token Contracts",
   "tokenUpgradability": "Token Upgradability",
-  "proposalFlow": "Proposal Flow",
-  "ace": "ACE"
+  "proposalFlow": "Proposal Flow"
 }

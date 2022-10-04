@@ -1,5 +1,19 @@
-## Shares Token
+## Base token
 
-Clone-and-Own 
+The base token for both loot and shares are 
 
-## Loot Token
+- standard erc20s with permit support. 
+- impliment ownership, minting, burning and pausing.
+- support uups upgradability
+
+
+## Shares Token (SharesERC20.sol)
+
+The shares token is an upgradable erc20 that primarly uses the Openzeplin governance imports. 
+
+BaalVotes.sol: Is based off of the OpenZepplin ERC20Votes.sol except that writeCheckpoint
+uses block.timestamp instead of block.number
+
+## Loot Token (LootErc20.sol)
+
+The loot token is an upgradable erc20 by default it uses OZ snapshot to enable onchain signaling utility

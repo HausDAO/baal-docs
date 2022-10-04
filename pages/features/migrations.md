@@ -68,7 +68,7 @@ This should be done with caution for a few reasons.
 The erc20 tokens are upgradable which means the current logic can be changed and new logic can be added, while keeping the state (vote power/delegations) and the same address. This would usually happen through dao proposal, or if the token has been ejected, by the new owner.
 
 ### Upgrade existing token to baal governance
-Any current token that implements the same interface as lootToken.sol or sharesToken.sol or an upgradable token could be used in baal. 
+Any current token that implements the same interface as LootERC20.sol or SharesERC20.sol or an upgradable token could be used in baal. 
 
 ### Migration from v3 to v3x-v4
 
