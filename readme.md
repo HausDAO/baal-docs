@@ -2,4 +2,4 @@
 
 _Baal sets the season, and gives forth His voice from the clouds._
 
-There was a time when humanity mistakenly assumed that we were at battle against each other.  Then, the original Moloch DAO contract made us aware that the enemy is Moloch, the demon god of coordination failure.  Moloch v2 helped us to begin efforts of working together to solve the problems that affect us all.  Baal is Moloch v3 and offers more tools to improve these efforts.
+There was a time when humanity assumed we were at battle against each other. However, we were actually in a battle with Moloch -- the demon God of coordination failure. A strategy to beat Moloch was hypothesised, and Moloch v1 was an experiment to validate it. Moloch v2 expanded on its success, and gave us the confidence to be bolder with our solution. This birthed Baal, the third version of the MolochDAO contract aiming to strike fear in the eyes of Moloch itself.
