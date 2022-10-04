@@ -11,7 +11,7 @@ delegation state but can change the governance/treasury strategies.
 This includes the ability to 
 - Eject tokens from the core governance contract
 - Upgrade tokens to a different dao contract platform
-- UPgrade version of current governance platform to a newer version
+- Upgrade version of current governance platform to a newer version
 - Extend logic in tokens.
 
 This is a powerful tool and with the extra flexibility there are a few 
@@ -23,8 +23,8 @@ extra care here, you should really know what you are doing.
 Through summoning with the factory the tokens, by default,
 are owned by the core governance contract (Baal.sol). This allows the 
 the DAO to mint and burn shares as needed (through proposal, manager shaman or ragequit).
-If a DAO decides to renounce ownership in the tokens this will disable 
-the functions that are permissioned to 'owner only'. 
+If a DAO decides to **renounce ownership** in the tokens this will disable 
+the functions that are permissioned to '**owner only**'. 
 That means that minting, burning and upgrades would be disabled. 
 The core governance will not work as expected and may not work at all. (for example, ragequit)
 
