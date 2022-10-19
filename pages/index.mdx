@@ -2,167 +2,186 @@ import Bleed from 'nextra-theme-docs/bleed'
 import Image from 'next/image'
 import Callout from 'nextra-theme-docs/callout'
 
-# Baal 👺
-
-## Meet Baal
+# Meet Baal 👺
 
 <Callout emoji="👺">
-  Baal sets the season, and gives forth His voice from the clouds._
+  Baal sets the season, and gives forth His voice from the clouds.
 </Callout>
 
-_There was a time when humanity mistakenly assumed that we were at battle against each other. Then, the original Moloch DAO contract made us aware that the enemy is Moloch, the demon god of coordination failure._
+_There was a time when humanity assumed we were at battle against each other. However, we were actually in a battle against Moloch -- the demon God of coordination failure. A strategy to beat Moloch was hypothesised, and Moloch v1 was an experiment to validate it._
 
-_Moloch v2 helped us to begin efforts of working together to solve the problems that affect all of humanity. Baal is Moloch v3 and offers more tools to improve these efforts._
+_Moloch v2 expanded on its success, and gave us the confidence to be bolder with our approach. This birthed Baal, the third version of the MolochDAO contract aiming to strike fear in the eyes of Moloch itself._
 
-_Your skills at wielding a pair of battle axes have improved. It is now time to test your courage. Moloch is a worthy foe. Aim for the head._
+_Your skills at wielding battle axes have improved. It is now time to test your courage. Moloch is a worthy foe. Aim for the head._
 
-Initial Development and much of this section is from the Moloch [Mystics GitHub Baal Repository](https://github.com/Moloch-Mystics/Baal)
-
-Current active development is happening in a fork on [DAOhaus Github](https://github.com/HausDAO/Baal)
-
-This is the most recent collaborative repository for Moloch V3, codename Baal. (July 15, 2022). This message will change when the repository is deprecated.
-
-Baal is a minimal yet composable DAO template continuing work from the Moloch, Minion and Compound frameworks to make it easier for people to combine and command crypto assets with intuitive membership games.
+Baal is a minimal yet composable DAO template. It continues work from the Moloch, Minion and Compound frameworks that made it easier for people to combine and command crypto assets with intuitive membership games.
 
 <Image src="/baal.gif" alt="Baal Animation" width={500} height={500} />
 
-## Introduction
+The initial development of v3 (and a majority of this section) borrows from the [Moloch Mystics' Baal repository](https://github.com/Moloch-Mystics/Baal), and current active development happens in a fork located in [DAOhaus' Baal repo](https://github.com/HausDAO/Baal).
 
-Baal is a governance layer that sits on top of a multisig treasury layer. It uses the [Gnosis Zodiac](https://github.com/gnosis/zodiac) standards to interface with the treasury.
+In case the repository is updated or shifted, a message shall be posted here.
 
-By abstracting governance into its own layer Baal allow a more nounced 'Moloch style' control over consensus.
+## Baal (Moloch V3)
+
+Baal is the code name for MolochV3
+
+Baal is a governance layer that sits on top of a multisig treasury. It uses the [Gnosis Zodiac](https://github.com/gnosis/zodiac) standards to interface with the treasury.
+
+By abstracting governance into its own layer, Baal enables a more nuanced, Moloch-style control over consensus.
 
 ### Governance Units
 
-Just like in the [Moloch V2 contracts](https://github.com/MolochVentures/moloch) there are 2 main governance units
+There are two main governance units in Moloch v3. These are the same as that of [v2](https://github.com/MolochVentures/moloch), namely, *membership shares* and *loot shares*. However, the key difference in v3 is their transferability.
 
-- shares
-- loot
+In Moloch v3, both membership and loot shares are ERC20 tokens. This means that thier minting, burning and transferability can be controlled by the main DAO contract.
 
-These are both represented now by erc20s which can have minting, burning and transferability controlled by the main DAO contract.
-
-Unlike Moloch V2, transferability of these tokens can be controlled by the DAO.
-
-<Callout emoji="👺">
-  SoulBound DAO A DAO may start soul bound (like v2) but then decide at some
-  future time to turn on tradability for shares and/or loot.
+<Callout emoji="💡">
+  A DAO may start off with non-transferable membership and loot shares, but can later "turn on" the transferability of both types of shares.
 </Callout>
 
-#### Shares
+#### Membership and Loot Shares
 
-Just like Moloch V2 shares have direct execution, voting and exit rights around actions taken by the main dao contract. Shareholders are the collective DAO admins.
+Membership and loot shares continue to hold the same rights in v3 as they did in v2. So membership shares continue to hold execution, voting and exit rights; and loot shares continue to hold only exit rights.
 
-#### Loot
+### DAO Configuration and Guild Management
 
-Also similar to Moloch V2, loot has only exit rights against the DAO treasury, so loot does not have the ability to admin the DAO config. But because it has exit rights it is still a powerful unit and also because it is an erc20 can be used in the many composible ways a token can be used.
+In v3, there are many configuration options that can be updated in the contract. These updates are done through the standard proposal and governance flow. Examples of some updatable configuration options are: 
 
-### DAO configuration and guild management
+- The minting, burning or pausing of membership shares and loot shares.
+- Enabling or disabling shamans to set governance or admin configuration.
 
-There are many configuration options that can be updated in the contract through standard governance and proposal flow. For example:
-
-- Mint/burn/pause shares/loot
-- Set governance or admin configuration
-- Enable/Disable Shamans
-
-### Whats a Shaman?
-
-Besides standard governance by share holding members there is a new idea of a Shaman. Shamans are specific addresses that have more granular control outside the standard governance proposal flow. These addresses should always be contracts that have been explicitly given these rights through the standard proposal flow or during initial DAO setup.
-
-<Callout emoji="👺">
-  Shamans are addresses that can be granted roles that allow them to control
-  some aspects of the DAO configuration without proposal.
+<Callout emoji="💡">
+  Shamans are smart contracts that can exercise granular control over the DAO (outside of the standard governance process). Either they are given these extraordinary rights during the initial DAO setup or later on (through a proposal getting passed).
 </Callout>
 
-### Roles and Shamans
+### Shaman Roles
 
-The DAO is always a super admin over it's own config. Meaning the DAO can vote to make changes to its own configuration at any time.
+The DAO always has full control over its configuration. However, the DAO can decide to grant certain roles to Shamans that let these Shamans make changes to the DAO's configuration directly.
 
-Along with this, through roles, a more granular control can be given to Shamans.
+A Shaman can take on the following roles: 
 
-- Governor - Cancel a proposal, set Governance Config (change the length of proposals, if there is a required quorum, etc.)
-- Manager - mint/burn shares/loot
-- Admin - set Admin configuration and pause/unpause shares/loot
+- Governor: Cancel proposals, set/change governance configurations (like the length of proposals, quorum requirements, etc.)
+- Manager: Control the minting and burning of membership shares and loot shares.
+- Admin: Pause or unpause membership shares and loot shares, and set admin configurations. 
 
-### Initial setup
+For more details, click [here](tools/shaman).
 
-Initial setup of the dao can happen in 2 ways. See the baal Summoner factory for details.
+### Initial Setup
 
-- Standard summon - Deploy and setup all contracts (Core Dao, Erc20s) and treasuries (Gnosis Safe)
-- Bring your own treasury - Summon contracts but use an already deployed treasury (Gnosis Safe)
+The DAO can be setup in two ways: 
 
-In standard summoning, the summoner will provide a DAO name and token symbol along with a list of actions to be executed on setup. These initial actions may be setting governance/admin config, minting shares/loot to other initial members and/or adding any initial Shamans.
+1. The Standard Summon: Here you deploy and setup all contracts (the core DAO contract, ERC20s) and the treasury (Gnosis Safe).
 
-If you are bringing your own Safe - Setup will occur through a signed transaction in the multisig. This will do the same actions in the standard summon but will also enable the Baal module on the Safe.
+When you summon a DAO in the standard manner, the summoner must provide a DAO name, a token symbol and a list of actions to be executed on setup. These could be setting governance or admin configs, minting membership shares or loot shares to other initial members, and adding any Shamans and granting them roles.
 
-### Proposal flow
+2. The Custom Summon: Here you deploy and setup all contracts (the core DAO contract, ERC20s) but bring your own treasury (Gnosis Safe).
 
-The proposal flow is similar to a Moloch V2 but there are a few differences. Basically proposals are made to the dao to execute some code (could be minting shares, transferring funds, changing config, or any mix of things... every proposal is a multicall). It includes a time boxed window for voting, followed by one for a grace period. The basic flow is mapped out here:
+The Custom Summon is similar to the Standard Summon, the only difference is that a you will need to sign a transaction in your multisig safe which will initiate the same process as above and also enable the Baal module on your treasury.
 
-- Submit - A proposal is submitted by anyone
-  - An offering may be required by the DAO on proposal submission. This is mainly to prevent spam and is especially relevant on side chains. THis setting is configurable by the DAO.
-- Sponsor - Any member, as long as they have enough shares to meet the ‘sponsor threshold’ can sponsor a proposal. It may even auto sponsor if submitted by a member with enough shares.
-- Voting - The proposal will go into a voting period where shareholding members can vote yes or no
-- Grace - The proposal then goes into a grace period, this is where minority members or the dao can take further action (ragequit or cancel)
-- Ready - The proposal goes into a ready state, this is where actions included in the proposal can be executed.
-- Execution - After execution or if the proposal was terminated for some other reason then the proposal will be in one of these states
-  - Canceled - either canceled through failed execution or through a manager shaman or the sponsor.
-  - Processed - executed successfully
-  - Defeated - did not pass and will not execute
+See the `Baal Summoner factory` for more details.
 
+### Proposal Flow
+
+The proposal flow is similar to Moloch v2 albeit with a few small differences. In summary, all proposals are multi-call (as in, a proposal could trigger multiple actions if passed like transferring funds, minting shares, etc.) and include a time-boxed window for voting, followed by a time-boxed window for the grace period. The proposal flow is as follows: 
+
+#### 1. Submission
+
+A proposal must be first submitted for voting. DAOs can choose to require an offering to submit proposals to prevent spam (relevant on side-chains). 
+
+#### 2. Sponsoring
+
+For a proposal to go into voting, it must be sponsored by a current member. DAOs can specify the minimum number of membership shares required to sponsor a proposal. They can also setup "autosponsoring" in case a member satisfies the criteria of sponsoring a proposal.
+
+#### 3. Voting 
+
+After getting sponsored, the proposal goes into a voting period where members holding membership shares vote for or against the proposal.
+
+#### 4. Grace Period
+
+After the voting period has elapsed, the proposal enters a grace period. The point of a grace period is allow objecting members to ragequit or allow the proposal sponsor to cancel the proposal. 
+
+#### 5. Proposal is ready
+
+After the grace period is over, the proposal is "ready" to be executed.
+
+#### 6. Proposal is executed
+
+A member must execute the proposal once it's ready. Usually, the sponsor does so after a proposal is ready. The member triggering the execution of a ready proposal gets a small reward (from the amount that a sponsor has put up). The sponsor is refunded the amount they posted to sponsor the proposal (minus the reward given to the executor).
+
+#### 7. Post execution
+
+After execution, the proposal enters the processed state. This could either be `Processed` (i.e. the proposal was executed successfully) or `Defeated` (i.e. the proposal did not pass). 
+Additionally, the proposal can also be `Cancelled` (in cases of failed executed or if the manager shaman or sponsor cancels it in the grace period).
+
+<Callout emoji="💡">
 Proposals must be processed in the order they are voted on.
-
-<Callout emoji="👺">
-  Canceling a proposal Cancellable if proposal is in voting, sender is sponsor,
-  governor, or if sponsor has fallen below threshold A Governor Shaman can
-  cancel a proposal, it can be canceled anytime while in voting period.
 </Callout>
 
-Member actions
+### Member Actions
 
-- Vote - a member uses its shares to vote yes or no on a proposal.
-- Vote with signature - vote though eip 712 (allows votes to be collected through a gasless signature and submitted later)
-- Ragequit - burn some amount of shares/loot to a proportional amount of funds in the treasury
-- Delegate - add or remove your shares voting power to another address, this address can be another member or any address.
+#### 1. Vote
 
-<Callout emoji="👺">
-  Optimistic voting A proposal passes with more yes votes than no votes.
-  Depending on governance settings there may also be a required quorum of total
-  votes for a proposal to pass.
+A member holding membership proposals can vote for or against any proposal. Members can also vote with signatures (where votes are collected through and submitted later). This is a gasless process done via EIP712.
+
+<Callout emoji="💡">
+  All voting is optimistic in nature. This means that proposals pass if they have more `yes` votes than `no` votes at the end of the voting period. However, DAOs can also set minimum quorum requirements for proposals to pass.
 </Callout>
 
-### Governance Config, settings that can be modified by the DAO or by a Governor Shaman
+#### 2. Delegate
 
-- voting - minimum voting period length of a proposal
-- grace - minimum voting period length of a proposal
-- newOffering - the amount a native token that must be used when making a proposal, this is transferred to the dao and is non refundable.
-- quorum - minimum % of shares that must vote yes for it to pass
-- sponsorThreshold - minimum number of shares to sponsor a proposal (not %)
-- minRetention - auto-fails a proposal if more than (1- minRetentionPercent) \* total shares exit before processing
+Members can delegate their voting power to another address (this could be an address of another member).
 
-<Callout emoji="👺">See the Governance config section for more info.</Callout>
+Members can ragequit to burn some amount of membership shares or loot shares and receive a proportional amount of funds from the treasury.
 
-### Admin Config
+#### 3. Ragequit
 
-Admin config is to control the transferability of shares and loot.
+Members can ragequit to burn some amount of membership shares or loot shares and receive a proportional amount of funds from the treasury.
 
-### Note on other other baal only actions
+### Admin Config.
 
-You may see that "Guild Kick" (Changing shares to loot, a major tenent of Moloch v2) is not present in Baal, this is because it can be created through a baal only proposal (multi call that is voted on by the DAO). Also besides Guild kick you can also do the inverse as a "Promotion" (loot to shares).
+The admin config. controls the transferability of membership shares and loot shares.
 
-- execute as baal - A proposal can be executed from the baal contract directly (this mainly is used to for DAO configuration and member management, In can also be used to rescue funds that where sent directly to the baal contract)
-- admin locks - The DAO can permanently lock special rights that could be given to Shamans (for example, permanently disable Governor/Admin/Manager Shamans)
+### Governance Config.
+
+The governance config. settings control the various parameters relevant to governance (these are detailed below). These settings can be modified via a Governor Shaman or via the regular proposal process.
+
+Governance Config. parameters are: 
+
+1. *Voting:* The time period for which members can vote on a proposal.
+
+2. *Grace:* The time period after voting is finished and before the proposal can be executed.
+
+3. *New Offering::* The amount of a native token that must be offered when making a proposal. This is transferred to the DAO and is non-refundable. 
+
+4. *Quorum:* The minimum percentage of shares that must vote yes for the proposal to pass.
+
+5. *Sponsor Threshold:* The minimum *number of membership shares* that must be held by a member to sponsor a proposal. 
+
+6. *Minimum Retention:* It is completely possible to have members ragequit during the grace period after a proposal has passed. In such a case, DAOs can specify the minimum number of membership shares that must be held for a proposal to pass. If a large number of people ragequit and the number of outstanding membership shares falls below a certain threshold, the proposal is auto-failed.
+
+### Other Baal-only Actions
+
+In v3, the ability to "guildkick" members (i.e. converting their membership shares to loot shares) is not present. This is because this process can be created through multi-call Baal-only proposal. In this way, DAOs can execute the inverse of this process too (as a way to "promote" members).
+
+- *Execute as Baal*: In v3, proposals can be executed directly from the Baal contract (for example, proposals that affect the DAO configuration and member management.)
+
+<Callout emoji="💡">
+  "Executing as Baal" lets DAOs rescure funds that might have been sent to the Baal contract.
+</Callout>
+
+- *Admin Locks*: Since DAOs can employ Shamans to have direct control over the DAO (without having to pass proposals), they can also lock these special rights given to Shamans (to disable them).
 
 ## In the Wild
 
-### These are the Dapps and developer toolkits that use this contract
+### Dapps and dev toolkits using this contract:
 
-- [Daohaus v3 developer toolkit (alpha)](https://discord.gg/daohaus)
-- [Daohaus v3 DAO Hub, summoner and Admin UI (alpha)](https://discord.gg/daohaus)
-- [GNosis Safe App Moloch V3 Summoner (coming soon)](https://discord.gg/daohaus)
+1. [DAOhaus v3 dev toolkit (alpha)](https://discord.gg/daohaus)
+2. [DAOhaus v3's DAO Hub, Summoner and Admin UI (alpha)](https://discord.gg/daohaus)
+3. [Gnosis Safe App Moloch v3 Summoner (coming soon)](https://discord.gg/daohaus)
 
-## DAOs
-
-- Battle Testing DAOs in the wild
+### DAOs using this contract:
+*Coming soon!*
 
 ## Audits
 
@@ -175,22 +194,18 @@ You may see that "Guild Kick" (Changing shares to loot, a major tenent of Moloch
 - **Score**: 9.6
 - **Date**: September 1, 2022
 
-## Deployed on Networks
+## Networks
 
-Goerli Baal Factory: 0x0C5fd8AAdF995e11E5Ac1CD72139Ee4fd72cDeFC
+Goerli Baal Factory: `0x0C5fd8AAdF995e11E5Ac1CD72139Ee4fd72cDeFC`
 
 ## Moloch v3x and v4
 
-We only just begun, stop by and say hi to learn about features/contracts in the works and how to get involved.
+We've only just begun! [Stop by and say hi](https://discord.gg/zSx96PmthM) to learn about features we're working on, and ways to get involved.
 
 ## Contributions
 
-The Moloch contracts are built and maintained by larger group of opensource developers and teams.
+The Moloch contracts are built and maintained by a larger group of developers and teams. All our code is open source and all contributions, review and sanity checks are welcome.
 
-Code is open source and any contributions, reviews, and sanity checks are welcome.
+These docs refer to the Baal working branch in the [DAOhaus repo](https://github.com/HausDAO/Baal). That branch in itself is a fork of the [Moloch Mystics' Repo](https://github.com/Moloch-Mystics/Baal). 
 
-Working branch that these docs refer to is at the [Daohaus Repo](https://github.com/HausDAO/Baal) feat/baalZodiac branch
-
-Forked from [Moloch Mystics Repo](https://github.com/Moloch-Mystics/Baal)
-
-Convorsations are happening in the metacartel discord #los-moloches [MetaCartel](https://discord.gg/zSx96PmthM)
+Conversations regarding development happen in the #los-moloches channel in the MetaCartel Discord server. [Come through!](https://discord.gg/zSx96PmthM)

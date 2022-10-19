@@ -1,0 +1,40 @@
+import Callout from 'nextra-theme-docs/callout'
+
+# Token Upgradability and Ownership
+
+The loot and shares tokens are now upgradable erc20s. 
+Through a DAO proposal a token can be upgraded and/or ownership can be renounced or changed
+This adds flexibility around extending and adding future extendability.
+Through the upgrade process the tokens will keep their vote power and 
+delegation state but can change the governance/treasury strategies. 
+
+This includes the ability to 
+- Eject tokens from the core governance contract
+- Upgrade tokens to a different dao contract platform
+- Upgrade version of current governance platform to a newer version
+- Extend logic in tokens.
+
+This is a powerful tool and with the extra flexibility there are a few 
+things to note about this functionality. Upgrading the token or changing ownership 
+may disable or cause the governance contract to not work as expected so there should be 
+extra care here, you should really know what you are doing.
+
+## Ownership
+Through summoning with the factory the tokens, by default,
+are owned by the core governance contract (Baal.sol). This allows the 
+the DAO to mint and burn shares as needed (through proposal, manager shaman or ragequit).
+If a DAO decides to **renounce ownership** in the tokens this will disable 
+the functions that are permissioned to '**owner only**'. 
+That means that minting, burning and upgrades would be disabled. 
+The core governance will not work as expected and may not work at all. (for example, ragequit)
+
+Borking the treasury: One thing to be especially careful of is making the treasury(Safe) not accessible.
+Before upgrades which eject or disable the governance contract it is 
+important to have new signers/modules on the Safe that can access any funds
+
+## Notes on UUPS pattern
+The tokens use the UUPS pattern of upgradeability. 
+One of the drawbacks of using such a pattern is that 
+if a future implementation does not
+implement the function, then upgrades for the tokens have effectively been killed.
+

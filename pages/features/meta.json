@@ -1,4 +1,10 @@
 {
   "updates": "Moloch V3 Updates",
-  "ragequit": "Rage Quit"
+  "ragequit": "Rage Quit",
+  "metaTransactions": "Meta Transactions",
+  "shamanBestPractice": "Shaman Best Practice",
+  "migrations": "Migrations",
+  "erc20TokenContracts": "ERC20 Token Contracts",
+  "tokenUpgradability": "Token Upgradability",
+  "proposalFlow": "Proposal Flow"
 }

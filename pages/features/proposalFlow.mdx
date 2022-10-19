@@ -1,0 +1,46 @@
+import Callout from 'nextra-theme-docs/callout'
+
+The proposal flow is similar to Moloch v2 albeit with a few small differences. In summary, all proposals are multi-call (as in, a proposal could trigger multiple actions if passed like transferring funds, minting shares, etc.) and include a time-boxed window for voting, followed by a time-boxed window for the grace period. The proposal flow is as follows: 
+
+#### 1. Submission
+
+A proposal must be first submitted for voting. DAOs can choose to require an offering to submit proposals to prevent spam (relevant on side-chains). 
+
+#### 2. Sponsoring
+
+For a proposal to go into voting, it must be sponsored by a current member. DAOs can specify the minimum number of membership shares required to sponsor a proposal. They can also setup "autosponsoring" in case a member satisfies the criteria of sponsoring a proposal.
+
+#### 3. Voting 
+
+After getting sponsored, the proposal goes into a voting period where members holding membership shares vote for or against the proposal.
+
+#### 4. Grace Period
+
+After the voting period has elapsed, the proposal enters a grace period. The point of a grace period is allow objecting members to ragequit or allow the proposal sponsor to cancel the proposal. 
+
+#### 5. Proposal is ready
+
+After the grace period is over, the proposal is "ready" to be executed.
+
+#### 6. Proposal is executed
+
+A member must execute the proposal once it's ready. Usually, the sponsor does so after a proposal is ready. The member triggering the execution of a ready proposal gets a small reward (from the amount that a sponsor has put up). The sponsor is refunded the amount they posted to sponsor the proposal (minus the reward given to the executor).
+
+#### 7. Post execution
+
+After execution, the proposal enters the processed state. This could either be `Processed` (i.e. the proposal was executed successfully) or `Defeated` (i.e. the proposal did not pass). 
+Additionally, the proposal can also be `Cancelled` (in cases of failed executed or if the manager shaman or sponsor cancels it in the grace period).
+
+<Callout emoji="💡">
+Proposals must be processed in the order they are voted on.
+</Callout>
+
+<Callout emoji="💡">
+Note on Sponsor Threshold:
+A proposal can be sponsored by aby member with enough shares to meet the 
+sponsor threshold. The member could then transfer their shares dropping 
+their membership below the threshold. THis is odd because other members are 
+voting on a proposal that was sponsored by a person that is no longer a member. 
+If this situation does happen any member can cancel this proposals, but 
+if no one cancels it it will continue like normal.
+</Callout>
